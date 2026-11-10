@@ -1,0 +1,11 @@
+import {chromium,expect} from '@playwright/test';
+import {writeFile} from 'node:fs/promises';
+const browser=await chromium.launch();const page=await browser.newPage({viewport:{width:1440,height:1000}});
+await page.goto('http://localhost:3000',{waitUntil:'networkidle'});
+await page.locator('.nav-service').hover();
+await expect(page.locator('#services-menu')).toBeVisible();
+const link=page.locator('#services-menu a[href="/services/web-development"]');
+const box=await link.boundingBox();await page.mouse.move(box.x+40,box.y+15,{steps:15});await page.waitForTimeout(180);await expect(link).toBeVisible();
+await link.click();await expect(page).toHaveURL('http://localhost:3000/services/web-development');
+await page.goto('http://localhost:3000',{waitUntil:'networkidle'});await page.locator('.nav-service').focus();await page.keyboard.press('Enter');await expect(page.locator('#services-menu')).toBeVisible();await page.keyboard.press('Escape');await expect(page.locator('#services-menu')).toHaveCount(0);
+const report={hoverBridge:true,serviceNavigation:true,keyboardOpenAndEscape:true};await writeFile('test-results/menu-check.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));await browser.close();
