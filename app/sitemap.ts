@@ -3,6 +3,7 @@ import { startingPoints } from "@/content/starting-points";
 import { services } from "@/content/services";
 import { industries } from "@/content/site";
 import { work } from "@/content/work";
+import { integrations } from "@/content/integrations";
 import { posts } from "@/content/posts";
 export default function sitemap(): MetadataRoute.Sitemap {
   const origin = process.env.SITE_URL;
@@ -11,6 +12,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/services",
     "/work",
+    "/integrations",
+    ...integrations.map((t) => `/integrations/${t.slug}`),
     "/about",
     "/blog",
     "/contact",

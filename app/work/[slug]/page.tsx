@@ -5,6 +5,7 @@ import { work } from "@/content/work";
 import { InnerHero } from "@/components/inner";
 import { ProjectArt } from "@/components/sections/work";
 import { Contact } from "@/components/sections/contact";
+import { ProjectExperience } from "@/components/project-experience";
 import { Copy, RoundArrow } from "@/components/ui";
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -88,6 +89,7 @@ export default async function WorkPage({
           </div>
         </div>
       </section>
+      <ProjectExperience slug={w.slug} name={w.projectName} focus={w.stack} />
       <Contact />
     </>
   );

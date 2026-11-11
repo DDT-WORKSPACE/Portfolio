@@ -8,7 +8,10 @@
     "build:draft": "node scripts/build-draft.mjs",
     "start": "next start --hostname 0.0.0.0",
     "check": "tsc --noEmit",
-    "test:browser": "node scripts/browser-check.mjs"
+    "test:browser": "node scripts/agency-refinement-check.mjs",
+    "test:mobile": "node scripts/agency-mobile-check.mjs",
+    "test:additions": "node scripts/studio-additions-check.mjs",
+    "test:polish": "node scripts/final-polish-check.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "latest",

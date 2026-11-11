@@ -16,7 +16,13 @@ import { projectSchema, type ProjectInput, formCopy } from "@/content/forms";
 import { projectTypes, budgets, headings, site } from "@/content/site";
 import { sendProject } from "@/app/actions";
 import { Copy, Marker } from "../ui";
-export function Contact({ calendarUrl }: { calendarUrl?: string }) {
+export function Contact({
+  calendarUrl,
+  embedded = false,
+}: {
+  calendarUrl?: string;
+  embedded?: boolean;
+}) {
   const [success, setSuccess] = useState(false),
     [serverError, setServerError] = useState(""),
     [calendar, setCalendar] = useState(false);
@@ -78,12 +84,24 @@ export function Contact({ calendarUrl }: { calendarUrl?: string }) {
       ? calendarUrl
       : undefined;
   return (
-    <section className="contact-section contact-refined">
+    <section
+      className={`contact-section contact-refined ${embedded ? "contact-embedded" : ""}`}
+    >
       <div className="container contact-layout">
         <div className="contact-copy">
-          <Marker>{headings.contact.marker}</Marker>
-          <h2>{headings.contact.title}</h2>
-          <p>{headings.contact.body}</p>
+          <Marker>
+            {embedded ? "Start your project" : headings.contact.marker}
+          </Marker>
+          <h2>
+            {embedded
+              ? "What would you like to make easier?"
+              : headings.contact.title}
+          </h2>
+          <p>
+            {embedded
+              ? "A new product, a better customer experience, or a business process that takes too much time. Tell us where you are and where you want to go."
+              : headings.contact.body}
+          </p>
           <div className="contact-details">
             {[
               [Mail, site.email],

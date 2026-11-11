@@ -32,7 +32,12 @@ export function DeferredSequence({
         }
       },
       {
-        rootMargin: kind === "services" ? "500px 0px" : "0px",
+        rootMargin:
+          kind === "services"
+            ? "500px 0px"
+            : kind === "process"
+              ? "300px 0px"
+              : "0px",
         threshold: 0.03,
       },
     );

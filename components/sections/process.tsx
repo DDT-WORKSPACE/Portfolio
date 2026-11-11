@@ -39,6 +39,23 @@ export function Process() {
     return () => query.removeEventListener("change", update);
   }, []);
   const pinned = pinnable && !reduced;
+  useEffect(() => {
+    if (!pinned) return;
+    const frame = requestAnimationFrame(() => {
+      const el = ref.current;
+      if (!el) return;
+      const start = el.getBoundingClientRect().top + window.scrollY;
+      const range = el.offsetHeight - innerHeight;
+      if (range > 0)
+        commit(
+          Math.min(
+            3,
+            Math.max(0, Math.floor(((window.scrollY - start) / range) * 4)),
+          ),
+        );
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [pinned]);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: pinned ? ["start start", "end end"] : ["start 70%", "end 30%"],

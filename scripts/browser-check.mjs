@@ -8,28 +8,25 @@ const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
 page.on("pageerror", (e) => errors.push(e.message));
 const origin = process.env.TEST_URL ?? "http://localhost:3000";
 await page.goto(origin, { waitUntil: "networkidle" });
-await expect(page.locator("h1")).toHaveText(
-  /One team\s*fromfirst idea to launch\./,
+await expect(page.locator("h1")).toHaveText(/Built to move you forward/);
+await expect(page.locator(".st-hero-description")).toContainText(
+  "Websites, mobile apps and AI-powered workflows",
 );
 await page.screenshot({ path: "test-results/hero-1440.png" });
-await page.locator('[data-sequence="services"]').scrollIntoViewIfNeeded();
-await page.waitForTimeout(1800);
-await page.locator('[data-tile="0"]').hover();
-await expect(page.locator("#detail-0")).toBeVisible();
-await expect(page.locator("#detail-0")).toHaveCSS("opacity", "1");
-await expect(page.locator("#detail-0")).toContainText("Web development");
-await page.screenshot({ path: "test-results/services-1440.png" });
-await page.locator('[data-tile="0"]').focus();
-await page.keyboard.press("ArrowDown");
-await expect(page.locator('[data-tile="1"]')).toBeFocused();
-await expect(page.locator("#detail-1")).toContainText("Mobile apps");
-await page.keyboard.press("Escape");
-await expect(page.locator(".service-detail")).toHaveCount(0);
-checks.push("Desktop service hover, arrow keys and Escape");
+await page.locator("#services").scrollIntoViewIfNeeded();
+await expect(page.locator(".st-offer")).toHaveCount(4);
+await expect(page.locator(".offer-automation")).toHaveAttribute(
+  "href",
+  "/services/ai-automation",
+);
+checks.push("Focused hero and four clearly linked illustrated services");
 await page.locator("#faq").scrollIntoViewIfNeeded();
-await page.locator(".faq-item button").first().click();
-await expect(page.locator(".faq-item").first()).toHaveClass(/open/);
-checks.push("FAQ accordion");
+await page.locator(".st-faq-list summary").first().click();
+await expect(page.locator(".st-faq-list details").first()).toHaveAttribute(
+  "open",
+  "",
+);
+checks.push("FAQ disclosure");
 await page.goto(origin + "/contact", { waitUntil: "networkidle" });
 await page.getByRole("button", { name: "Send my project" }).click();
 await expect(page.getByText("Please enter your name.")).toBeVisible();
@@ -121,18 +118,13 @@ await expect(page).toHaveURL(origin + "/work");
 await expect(page.locator(".mobile-menu")).toHaveCount(0);
 checks.push("Mobile navigation");
 await page.goto(origin, { waitUntil: "networkidle" });
-await page.locator('[data-sequence="services"]').scrollIntoViewIfNeeded();
-await page.locator(".mobile-service>button").first().click();
-await expect(page.locator(".mobile-service").first()).toHaveClass(/open/);
-await expect(
-  page
-    .locator(".mobile-service")
-    .first()
-    .getByText(
-      "Fast, accessible sites and web apps your team can keep building on.",
-    ),
-).toBeVisible();
-checks.push("Mobile service accordion");
+await page.locator("#services").scrollIntoViewIfNeeded();
+await expect(page.locator(".st-offer")).toHaveCount(4);
+await expect(page.locator(".offer-mobile")).toHaveAttribute(
+  "href",
+  "/services/mobile-apps",
+);
+checks.push("Mobile illustrated services");
 await writeFile(
   "test-results/browser-report.json",
   JSON.stringify({ checks, errors }, null, 2),

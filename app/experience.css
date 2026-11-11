@@ -232,9 +232,9 @@
   margin-top: -26px;
   width: 206px;
   height: 52px;
-  border: 1px solid #d5def0;
+  border: 1px solid #d9ece3;
   background: white;
-  box-shadow: 0 10px 30px -20px #1a62ff70;
+  box-shadow: 0 10px 30px -20px #035fe870;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -250,7 +250,7 @@
   height: 30px;
   display: grid;
   place-items: center;
-  background: #eaf1ff;
+  background: #edfcf5;
   border-radius: 8px;
   color: var(--blue);
 }
@@ -280,10 +280,10 @@
   justify-content: center;
   gap: 12px;
   background: white;
-  border: 1px solid #cbd9f7;
+  border: 1px solid #d1f1e2;
   border-radius: 16px;
   padding: 16px;
-  box-shadow: 0 22px 40px -24px #1a62ff70;
+  box-shadow: 0 22px 40px -24px #035fe870;
 }
 .connected-core > div > span {
   font-family: var(--font-display);
@@ -393,8 +393,8 @@
   position: relative;
   min-height: 395px;
   padding: 28px 22px 0;
-  background: #eaf1ff;
-  border: 1px solid #d3dff7;
+  background: #edfcf5;
+  border: 1px solid #d8f2e5;
   border-radius: 16px;
   overflow: hidden;
 }
@@ -402,17 +402,17 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, transparent 39px, #1a62ff0b 40px, transparent 41px),
-    linear-gradient(transparent 39px, #1a62ff0b 40px, transparent 41px);
+    linear-gradient(90deg, transparent 39px, #035fe80b 40px, transparent 41px),
+    linear-gradient(transparent 39px, #035fe80b 40px, transparent 41px);
   background-size: 40px 40px;
   pointer-events: none;
 }
 .studio-window {
   position: relative;
   background: white;
-  border: 1px solid #ced9ed;
+  border: 1px solid #d2e9de;
   border-radius: 11px;
-  box-shadow: 0 20px 40px -26px #1a62ff75;
+  box-shadow: 0 20px 40px -26px #035fe875;
   overflow: hidden;
   transform: perspective(1400px) rotateY(-3deg) rotateX(2deg);
   transform-origin: center;
@@ -438,11 +438,11 @@
 .studio-chrome > span:first-child > i {
   width: 5px;
   height: 5px;
-  border: 1px solid #aab7cf;
+  border: 1px solid #afcabd;
   border-radius: 50%;
 }
 .studio-chrome > span:first-child > i:first-child {
-  background: #ff6a0070;
+  background: #42bd6b70;
   border-color: transparent;
 }
 .studio-live {
@@ -514,7 +514,7 @@
   width: 130px;
   transform: rotate(-6deg);
   line-height: 1.5;
-  box-shadow: 0 12px 20px -18px #ff6a0060;
+  box-shadow: 0 12px 20px -18px #42bd6b60;
   position: relative;
 }
 .scope-note > span {
@@ -590,7 +590,7 @@
 }
 .scope-board > button > span.checked {
   color: var(--blue);
-  background: #eaf1ff;
+  background: #edfcf5;
   border-color: transparent;
 }
 .scope-board-footer {
@@ -660,14 +660,14 @@
   border: 4px solid white;
   background: var(--paper);
   padding: 7px 8px;
-  box-shadow: 0 12px 25px -15px #1a62ff60;
+  box-shadow: 0 12px 25px -15px #035fe860;
   transition:
     transform 0.25s,
     border-color 0.25s;
   white-space: pre-line;
 }
 .design-device.selected {
-  border-color: #b2c9ff;
+  border-color: #bcf5d9;
   transform: translateY(-8px);
 }
 .device-notch {
@@ -691,7 +691,7 @@
 }
 .device-hero {
   height: 49px;
-  background: #eaf1ff;
+  background: #edfcf5;
   display: grid;
   place-items: center;
   border-radius: 7px;
@@ -735,7 +735,7 @@
   height: 4px;
   width: 4px;
   border-radius: 1px;
-  background: #a9b8d7;
+  background: #afd1c1;
 }
 .device-nav > i:first-child {
   background: var(--blue);
@@ -746,7 +746,7 @@
   right: 30px;
   top: 52%;
   height: 1px;
-  background: #1a62ff40;
+  background: #035fe840;
 }
 .design-cursor {
   position: absolute;
@@ -816,7 +816,7 @@
   white-space: pre;
 }
 .code-line > span {
-  color: #8491ab;
+  color: #89a698;
   display: inline-block;
   width: 26px;
 }
@@ -826,7 +826,7 @@
 }
 .code-line strong {
   font-weight: 400;
-  color: #5b6785;
+  color: #617f71;
 }
 .build-jobs {
   display: grid;
@@ -872,7 +872,7 @@
   font-size: 7px;
 }
 .studio-avatar {
-  background: #eaf1ff;
+  background: #edfcf5;
   color: var(--blue);
   font-family: var(--font-display);
   height: 19px;
@@ -906,7 +906,7 @@
   left: 50%;
   top: 21px;
   margin-left: -145px;
-  border: 1px solid #1a62ff14;
+  border: 1px solid #035fe814;
   border-radius: 50%;
   transform: rotate(-16deg);
 }
@@ -927,11 +927,11 @@
   position: relative;
   width: max-content;
   margin: 0 auto;
-  border: 1px solid #cddaf5;
+  border: 1px solid #d2f0e1;
   border-radius: 16px;
   padding: 20px 23px;
   background: white;
-  box-shadow: 0 20px 35px -24px #1a62ff80;
+  box-shadow: 0 20px 35px -24px #035fe880;
   font-family: var(--font-display);
   font-size: 22px;
   letter-spacing: -0.8px;
@@ -954,7 +954,7 @@
   margin-left: 3px;
 }
 .is-launched .launch-product-action {
-  background: #eaf1ff;
+  background: #edfcf5;
   color: var(--blue);
 }
 .launch-checks {
@@ -1002,7 +1002,7 @@
   width: 480px;
   min-height: 650px;
   padding: 28px;
-  background: #eaf1ff;
+  background: #edfcf5;
 }
 .industry-v2.industry-1 {
   background: white;
@@ -1017,7 +1017,7 @@
 .industry-art-grid {
   position: absolute;
   inset: 25px 0;
-  background: radial-gradient(#b9c8e7 1px, transparent 1px) 0 0/20px 20px;
+  background: radial-gradient(#bfe1d1 1px, transparent 1px) 0 0/20px 20px;
   mask-image: radial-gradient(ellipse, black 20%, transparent 65%);
 }
 .industry-phone {
@@ -1045,7 +1045,7 @@
   color: var(--blue);
   border: 1px solid var(--mist);
   transform: rotate(9deg);
-  box-shadow: 0 20px 35px -25px #1a62ff70;
+  box-shadow: 0 20px 35px -25px #035fe870;
 }
 .industry-art-tag {
   position: absolute;
@@ -1061,7 +1061,7 @@
   font-family: var(--font-mono);
   font-size: 8px;
   transform: rotate(-5deg);
-  box-shadow: 0 12px 20px -15px #1a62ff60;
+  box-shadow: 0 12px 20px -15px #035fe860;
 }
 .industry-v2 h3 {
   font-size: 34px;
@@ -1085,7 +1085,7 @@
 .industry-tags > span {
   font-size: 9px;
   padding: 4px 8px;
-  border: 1px solid #b9c9e5;
+  border: 1px solid #bfdfd0;
   border-radius: 20px;
   color: var(--slate);
 }
@@ -1093,7 +1093,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid #cbd7ec;
+  border-top: 1px solid #cfe8dc;
   margin-top: 22px;
   padding-top: 17px;
   font-size: 12px;
@@ -1242,14 +1242,14 @@
   margin-top: 24px;
 }
 .project-story-cover {
-  background: #eaf1ff;
+  background: #edfcf5;
   border: 1px solid var(--mist);
   border-radius: 16px;
   position: relative;
   overflow: hidden;
   transform: rotate(2deg);
   transition: transform 0.4s;
-  box-shadow: 0 30px 50px -35px #1a62ff60;
+  box-shadow: 0 30px 50px -35px #035fe860;
 }
 .project-story-cover:hover {
   transform: rotate(0);
@@ -1361,11 +1361,11 @@
   display: grid;
   place-items: center;
   background: white;
-  border: 1px solid #cddbf6;
+  border: 1px solid #d3f0e2;
   border-radius: 24px;
   width: 88px;
   height: 88px;
-  box-shadow: 0 20px 40px -20px #1a62ff55;
+  box-shadow: 0 20px 40px -20px #035fe855;
   transform: rotate(-8deg);
 }
 .technology-hub > div > img {
@@ -1378,7 +1378,7 @@
   margin: -80px 0 0 -150px;
   width: 300px;
   height: 160px;
-  border: 1px solid #1a62ff25;
+  border: 1px solid #035fe825;
   border-radius: 50%;
   transform: rotate(-30deg);
 }
@@ -1397,7 +1397,7 @@
   width: 55px;
   height: 55px;
   color: var(--blue);
-  box-shadow: 0 15px 25px -20px #1a62ff60;
+  box-shadow: 0 15px 25px -20px #035fe860;
   transition: transform 0.4s;
 }
 .technology-hub:hover .tech-satellite {
@@ -1433,7 +1433,7 @@
 .tech-group-icon {
   display: grid;
   place-items: center;
-  background: #eaf1ff;
+  background: #edfcf5;
   width: 48px;
   height: 48px;
   border: 1px solid var(--mist);

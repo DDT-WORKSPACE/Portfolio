@@ -1,0 +1,3 @@
+﻿import {chromium,expect} from '@playwright/test';
+import {mkdir,writeFile} from 'node:fs/promises';
+const b=await chromium.launch();const p=await b.newPage({viewport:{width:1440,height:1000}});const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto('http://localhost:3000',{waitUntil:'networkidle'});await p.waitForTimeout(1500);await mkdir('test-results/landa',{recursive:true});await p.screenshot({path:'test-results/landa/hero-desktop.png'});for(const id of ['faq','contact']){await p.locator('#'+id).scrollIntoViewIfNeeded();await p.screenshot({path:`test-results/landa/${id}-desktop.png`});}console.log(JSON.stringify({errors,h1:await p.locator('h1').innerText(),width:await p.evaluate(()=>document.documentElement.scrollWidth)}));await b.close();

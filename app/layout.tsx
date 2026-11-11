@@ -11,19 +11,20 @@ import { Footer } from "@/components/footer";
 import { site } from "@/content/site";
 import "./globals.css";
 import "./experience.css";
-import "./hero.css";
 import "./refinements.css";
+import "./studio.css";
 const display = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
   weight: ["700", "800"],
+  preload: false,
 });
 const body = Instrument_Sans({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
-  preload: false,
+  preload: true,
 });
 const mono = Geist_Mono({
   subsets: ["latin"],
@@ -34,7 +35,7 @@ const mono = Geist_Mono({
 export const metadata: Metadata = {
   icons: { icon: "/Logo/logo.png", apple: "/Logo/logo.png" },
   title: {
-    default: "One team from first idea to launch",
+    default: "Websites, apps & business automation | DevsDen Tech",
     template: "%s | DevsDen Tech",
   },
   description: site.description,
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
     ? { metadataBase: new URL(process.env.SITE_URL) }
     : {}),
   openGraph: {
-    title: "One team from first idea to launch",
+    title: "Websites, apps & business automation | DevsDen Tech",
     description: site.description,
     type: "website",
   },

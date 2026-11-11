@@ -13,8 +13,8 @@ export default function Image() {
         flexDirection: "column",
         justifyContent: "space-between",
         padding: 70,
-        background: "#F6F8FC",
-        color: "#0A1633",
+        background: "#0B1019",
+        color: "#F3F6FC",
         fontFamily: "sans-serif",
       }}
     >
@@ -30,10 +30,10 @@ export default function Image() {
           maxWidth: 900,
         }}
       >
-        One team from first idea to launch.
+        We build software. You move forward.
       </div>
-      <div style={{ display: "flex", color: "#1A62FF", fontSize: 22 }}>
-        Software, design and business automation.
+      <div style={{ display: "flex", color: "#B4C9FF", fontSize: 22 }}>
+        Websites. Apps. Business automation.
       </div>
     </div>,
     size,

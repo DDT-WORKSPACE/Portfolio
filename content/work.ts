@@ -167,12 +167,12 @@ const projectNotes: Record<
     approach:
       "The portfolio presents a calendar-led mobile experience with upcoming reminders, simple status cues and distinct areas for records and navigation. The product explains its role as an organisation tool.",
     result:
-      "A considered mobile view of records, due dates and reminders, with a clear boundary around the product?s purpose.",
+      "A considered mobile view of records, due dates and reminders, with a clear boundary around the purpose of the product.",
     stack: ["Mobile UX", "Record organisation", "Reminder workflows"],
   },
   besttrip: {
     challenge:
-      "Travel search needs to make several decisions?destination, date and travel preferences?feel like one understandable task.",
+      "Travel search needs to make destination, date and travel preferences feel like one understandable task.",
     approach:
       "The presented website puts flight search first and uses destination imagery and offer cards to support exploration. Navigation separates different travel services while keeping the main search easy to find.",
     result:
