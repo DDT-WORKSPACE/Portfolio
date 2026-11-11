@@ -8,8 +8,8 @@ export default function WorkIndex() {
     <>
       <InnerHero
         marker="Our work"
-        title="Ideas made real"
-        body="Explore the outcomes, the decisions and the work along the way."
+        title="A closer look at our work."
+        body="Web platforms, mobile experiences and useful digital products. Explore the projects and the thinking behind them."
         cta={false}
       />
       <Work filterable />

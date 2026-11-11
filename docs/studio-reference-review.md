@@ -42,3 +42,7 @@ The owner's 26.33-second Screen Recording 2026-11-11 140041.mp4 was inspected ac
 The About screenshot guides a four-card light bento arrangement and a blue count strip. The count strip uses the actual ten-project and eleven-service catalogs plus four disciplines and one team. The Approach screenshot guides a wide active panel and three narrow numbered panels. It expands on click with corresponding content; the responsive version opens vertically.
 
 Discipline previews remove the surrounding chrome and decorative board. Existing source imagery remains limited to the supplied project crops; the website crop is capped at its 552px source width to avoid needless enlargement. Smooth transitions retain reduced-motion behavior. The hub preview now follows the mouse while over a node, clamps to the viewport and freezes in place when the pointer crosses to its content. The desktop contact form uses its normal explanatory copy to the left. Footer and hub surfaces use matching pale blue.
+
+## Owner correction: preserve the original web mockup
+
+The Web platforms preview has been restored to the complete owner-supplied public/Projects/talentbadger.jpg. Neither the earlier crop nor the scalable recreation is mounted. The design is not altered, and the aspect ratio is preserved. Service-hover details now explain the work, deliverables and scope in moderate-length copy for each of the eleven services. Tab selection adds an outgoing fade before the incoming view appears; reduced motion skips it.

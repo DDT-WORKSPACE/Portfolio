@@ -128,10 +128,10 @@ export function StudioHome() {
     <div className="studio-home-light">
       <StudioHero />
       <StudioAbout />
-      <AgencyDisciplines />
-      <AgencyProjects />
       <AgencyServices />
       <StudioIntegrations />
+      <AgencyProjects />
+      <AgencyDisciplines />
       <StudioApproach />
       <StudioFAQ />
       <AgencyCTA />

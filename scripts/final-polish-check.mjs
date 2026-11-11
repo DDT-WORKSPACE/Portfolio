@@ -76,13 +76,10 @@ for (let i = 0; i < 4; i++) {
     .screenshot({ path: `test-results/final-polish/discipline-${i}.png` });
   if (i < 2) {
     const image = p.locator(
-      i === 0 ? ".talent-platform-preview" : ".real-mobile-preview>img",
+      i === 0 ? ".real-web-preview>img" : ".real-mobile-preview>img",
     );
     const dims = await image.evaluate((e) => ({
-      natural:
-        e.tagName.toLowerCase() === "svg"
-          ? 720 / 510
-          : e.naturalWidth / e.naturalHeight,
+      natural: e.naturalWidth / e.naturalHeight,
       w: e.getBoundingClientRect().width,
       h: e.getBoundingClientRect().height,
       parent: e.parentElement.getBoundingClientRect().toJSON(),

@@ -23,7 +23,7 @@ The production content gate rejects unresolved double-curly-brace placeholders i
 
 - Blue/orange animated light hero with a larger centered portfolio-logo strip and a factual portfolio caption.
 - Four light illustrated About cards scatter from the center as the user scrolls. Card numbers and real catalog counts animate to their final values; reduced motion shows static final content.
-- Four discipline tabs with restrained fade/slide motion, a scalable Talent Badger layout reconstruction, the actual Renbite screen, a native design composition with side panels and an animated robot with changing speech bubbles. Surrounding browser/board backgrounds are removed.
+- Four discipline tabs with restrained fade/slide motion, the original supplied Talent Badger portfolio mockup, the actual Renbite screen, a native design composition with side panels and an animated robot with changing speech bubbles. Surrounding browser/board backgrounds are removed.
 - Five supplied portfolio projects retain native sticky overlap. Every project detail page includes an expanded product journey and design explanation.
 - An expanding light service hub with eleven service destinations. A clamped preview appears beside the hovered/focused node and remains reachable by mouse. Touch opens a compact preview with a detail link.
 - Ten integration tools in a gently moving connection diagram, a directory and ten substantive detail routes covering example workflows, scope, permissions and handover.
@@ -63,6 +63,8 @@ npm run test:polish
 
 The current browser suite checks hero motion, logo geometry, About content, discipline controls, project overlap, hub scaling/previews, FAQ, inline form validation, reduced motion, five widths and all generated content routes. The mobile suite covers touch navigation, product screens, service previews and form validation. The additions suite checks the split contact layout, mouse-to-preview navigation, four Approach panels, integration detail routes and expanded project content.
 
-Current reports and screenshots: test-results/studio-final. Earlier acceptance scripts and reports describe previous designs. Current results and limits: VERIFICATION.md.
+Current source-restoration/service-copy evidence: test-results/service-copy. Main regression captures: test-results/studio-final. Earlier acceptance scripts and reports describe previous designs. Current results and limits: VERIFICATION.md.
 
 Latest final-polish evidence: test-results/final-polish/report.json. The polish suite covers centered larger marks, reversible bento spreading, final count values, image aspect ratios, robot messages, restored design panels, larger service glyphs and whole-card Approach activation.
+
+Service-hover copy is maintained in content/service-previews.ts: each service has a business-facing description, two deliverables and an explicit scope note. Web platforms uses public/Projects/talentbadger.jpg directly, without crop, redraw or Next.js recompression. Discipline changes have a short outgoing fade followed by the incoming reveal, canceling stale changes during quick tab selection. Reduced motion skips the transition.

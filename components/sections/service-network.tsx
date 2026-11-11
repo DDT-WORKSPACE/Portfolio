@@ -1,10 +1,11 @@
 "use client";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, X } from "lucide-react";
+import { ArrowUpRight, X, Check } from "lucide-react";
 import { services } from "@/content/services";
 import { ServiceGlyph } from "@/components/service-glyph";
 import { traces } from "./traces";
+import { servicePreviews } from "@/content/service-previews";
 
 export function ServiceNetwork() {
   const [active, setActive] = useState<number | null>(null);
@@ -60,6 +61,7 @@ export function ServiceNetwork() {
     timer.current = setTimeout(() => setActive(null), 180);
   };
   const selected = active === null ? null : services[active];
+  const detail = selected ? servicePreviews[selected.slug] : null;
   return (
     <div
       className="sn-network"
@@ -189,10 +191,19 @@ export function ServiceNetwork() {
           >
             <X size={15} />
           </button>
-          <span>What we can help with</span>
           <h3>{selected.name}</h3>
-          <p>{selected.promise}</p>
-          <small>{selected.capabilities[0]}</small>
+          <p>{detail?.description}</p>
+          <ul className="sn-included">
+            {detail?.includes.map((item) => (
+              <li key={item}>
+                <Check size={13} />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="sn-scope">
+            <strong>Scope, made clear.</strong> {detail?.scope}
+          </p>
           <Link href={`/services/${selected.slug}`}>
             See the service <ArrowUpRight size={15} />
           </Link>

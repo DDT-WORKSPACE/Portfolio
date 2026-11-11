@@ -43,3 +43,9 @@ Without PROJECT_WEBHOOK_URL, the form prepares a validated draft to devsdevtech@
 - Five responsive widths have no horizontal document overflow. No new production performance score is claimed.
 
 Current polish captures and report: test-results/final-polish.
+
+## Service-copy and original-artwork correction
+
+Production build passed. Five targeted checks passed with no runtime errors or detected automated WCAG violations in the service network. The original public/Projects/talentbadger.jpg is rendered directly at 1280:853 aspect ratio (620 ? 413.17 CSS pixels in the desktop sample); no reconstruction is mounted. All eleven service previews have a substantive description, two deliverables and a scope note, with their bounding boxes inside the desktop viewport. A touch user can read the preview and reach the full detail page.
+
+The targeted transition check observed the outgoing content fading before replacement (sampled opacity 0) and confirmed rapid selections settle on the latest tab. Reduced-motion selection skips animation. The current baseline browser suite also passed 14 checks, covering navigation/content links, form validation, responsive widths, hub interaction and all 53 content routes. Reports: test-results/service-copy/report.json and test-results/studio-final/report.json.

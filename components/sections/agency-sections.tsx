@@ -23,7 +23,6 @@ import { services } from "@/content/services";
 import { ServiceNetwork } from "./service-network";
 import { Contact as ContactForm } from "./contact-form";
 import { industries } from "@/content/site";
-import { TalentPlatformPreview } from "@/components/talent-platform-preview";
 
 const disciplines = [
   {
@@ -118,7 +117,15 @@ function Preview({ type }: { type: string }) {
     <div className={`ag-preview real-preview preview-${type}`}>
       {type === "web" ? (
         <div className="real-web-preview">
-          <TalentPlatformPreview />
+          <Image
+            src="/Projects/talentbadger.jpg"
+            width={1280}
+            height={853}
+            alt="Original supplied Talent Badger project mockup, with its desktop and mobile website designs"
+            sizes="(max-width:767px) 90vw, 45vw"
+            unoptimized
+            quality={100}
+          />
           <Link href="/work/talentbadger">
             Explore the real project <ArrowUpRight size={13} />
           </Link>
@@ -224,7 +231,23 @@ function Preview({ type }: { type: string }) {
 
 export function AgencyDisciplines() {
   const [active, setActive] = useState(0);
-  const d = disciplines[active];
+  const [displayed, setDisplayed] = useState(0);
+  const [transitioning, setTransitioning] = useState(false);
+  useEffect(() => {
+    if (active === displayed) return;
+    if (matchMedia("(prefers-reduced-motion:reduce)").matches) {
+      setDisplayed(active);
+      setTransitioning(false);
+      return;
+    }
+    setTransitioning(true);
+    const timer = setTimeout(() => {
+      setDisplayed(active);
+      setTransitioning(false);
+    }, 180);
+    return () => clearTimeout(timer);
+  }, [active, displayed]);
+  const d = disciplines[displayed];
   return (
     <section className="st-section ag-disciplines" id="services">
       <div className="st-container">
@@ -273,9 +296,11 @@ export function AgencyDisciplines() {
         <div
           id="discipline-panel"
           role="tabpanel"
-          aria-labelledby={`discipline-${active}`}
+          aria-labelledby={`discipline-${displayed}`}
+          aria-busy={transitioning}
           className="ag-discipline-panel"
           data-discipline={d.type}
+          data-transition={transitioning ? "leaving" : "settled"}
         >
           <div className="ag-discipline-copy" key={d.slug}>
             <span className="ag-small-label">0{active + 1} / 04</span>
