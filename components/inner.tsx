@@ -18,24 +18,50 @@ export function InnerHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="inner-hero">
-      <div className="container">
-        <div className="breadcrumbs">
-          <Link href="/">Home</Link>
-          <span>/</span>
-          <span>{marker}</span>
+    <section className="dd-page-hero">
+      <div className="dd-page-sky" aria-hidden="true">
+        <div className="dd-beams is-soft">
+          <i />
+          <i />
+          <i />
         </div>
-        <Marker>{marker.toLowerCase()}</Marker>
+        <svg className="dd-arcs" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMin slice">
+          <defs>
+            <linearGradient id="pageArc" x1="0" x2="1">
+              <stop offset="0" style={{ stopColor: "var(--dd-blue-light)" }} />
+              <stop offset="0.4" style={{ stopColor: "var(--dd-blue)" }} stopOpacity="0.4" />
+              <stop offset="0.5" style={{ stopColor: "var(--dd-blue)" }} stopOpacity="0" />
+              <stop offset="0.62" style={{ stopColor: "var(--dd-orange)" }} stopOpacity="0.4" />
+              <stop offset="1" style={{ stopColor: "var(--dd-orange-light)" }} />
+            </linearGradient>
+          </defs>
+          <circle cx="800" cy="1500" r="1380" className="dd-arc" stroke="url(#pageArc)" />
+        </svg>
+        <div className="dd-stars" />
+      </div>
+      <div className="dd-container dd-page-hero-inner">
+        <nav className="dd-crumbs" aria-label="Breadcrumb">
+          <Link href="/">Home</Link>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{marker}</span>
+        </nav>
+        <span className="dd-badge is-dark">
+          <i aria-hidden="true" />
+          {marker}
+        </span>
         <h1>
           <Copy>{title.replace(/\.$/, "")}</Copy>
-          <span className="period">.</span>
         </h1>
         {body && (
-          <p className="lead">
+          <p className="dd-page-lead">
             <Copy>{body}</Copy>
           </p>
         )}
-        {cta && <Button>Book a free strategy call</Button>}
+        {cta && (
+          <div className="dd-page-actions">
+            <Button>Book a free strategy call</Button>
+          </div>
+        )}
         {children}
       </div>
     </section>

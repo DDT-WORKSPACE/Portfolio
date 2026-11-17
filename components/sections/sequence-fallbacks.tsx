@@ -82,9 +82,15 @@ export function ServicesFallback() {
           </svg>
           <div className="services-center">
             <div className="service-logo-placeholder">
-              <img
+              <img className="dd-th-brand"
                 src="/Logo/logo.png"
                 alt="DevsDen Tech logo"
+                width={64}
+                height={67}
+              />
+              <img loading="lazy" className="dd-th-emerald"
+                src="/Logo/logo-emerald.png"
+                alt=""
                 width={64}
                 height={67}
               />

@@ -45,9 +45,14 @@ export function Copy({
   );
 }
 export function Marker({ children }: { children: ReactNode }) {
+  const text =
+    typeof children === "string"
+      ? children.charAt(0).toUpperCase() + children.slice(1)
+      : children;
   return (
     <p className="marker">
-      <span aria-hidden="true">//</span> {children}
+      <span aria-hidden="true" />
+      {text}
     </p>
   );
 }
@@ -145,8 +150,15 @@ export function Brand({ large = false }: { large?: boolean }) {
   return (
     <span className={`brand ${large ? "brand-large" : ""}`}>
       <img
-        className="brand-mark"
+        className="brand-mark dd-th-brand"
         src="/Logo/logo.png"
+        width={32}
+        height={33}
+        alt=""
+      />
+      <img loading="lazy"
+        className="brand-mark dd-th-emerald"
+        src="/Logo/logo-emerald.png"
         width={32}
         height={33}
         alt=""

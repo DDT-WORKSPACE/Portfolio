@@ -169,9 +169,15 @@ function ServicesSequence() {
         >
           <div className="services-center">
             <div className="service-logo-placeholder">
-              <img
+              <img className="dd-th-brand"
                 src="/Logo/logo.png"
                 alt="DevsDen Tech logo"
+                width={64}
+                height={67}
+              />
+              <img loading="lazy" className="dd-th-emerald"
+                src="/Logo/logo-emerald.png"
+                alt=""
                 width={64}
                 height={67}
               />
@@ -195,8 +201,8 @@ function ServicesSequence() {
             >
               <defs>
                 <linearGradient id="trace-active">
-                  <stop stopColor="#1A62FF" />
-                  <stop offset="1" stopColor="#FF6A00" />
+                  <stop style={{ stopColor: "var(--blue, #1A62FF)" }} />
+                  <stop offset="1" style={{ stopColor: "var(--ember, #FF6A00)" }} />
                 </linearGradient>
               </defs>
               {traces.map((t, i) => (
@@ -216,7 +222,7 @@ function ServicesSequence() {
                         className="service-packet"
                         key={`${packet}-${active}`}
                         r="4"
-                        fill="#FF6A00"
+                        style={{ fill: "var(--ember, #FF6A00)" }}
                         opacity="0"
                       >
                         <animate

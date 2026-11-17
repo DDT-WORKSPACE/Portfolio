@@ -16,7 +16,21 @@ export function ServiceGlyph({ name }: { name: string }) {
   return (
     <span className="service-glyph" aria-hidden="true">
       <img
+        className="dd-th-brand"
         src="/service-atlas.webp"
+        width={1448}
+        height={1086}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        style={{
+          left: `${-(cell % 4) * 100}%`,
+          top: `${-Math.floor(cell / 4) * 100}%`,
+        }}
+      />
+      <img
+        className="dd-th-emerald"
+        src="/service-atlas-emerald.webp"
         width={1448}
         height={1086}
         alt=""

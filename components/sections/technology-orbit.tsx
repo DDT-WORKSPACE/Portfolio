@@ -32,7 +32,8 @@ export function TechnologyOrbit() {
       <span className="planet-ring outer-ring" />
       <span className="planet-ring inner-ring" />
       <div className="tech-orbit-core">
-        <img src="/Logo/logo.png" width={45} height={47} alt="" />
+        <img className="dd-th-brand" src="/Logo/logo.png" width={45} height={47} alt="" />
+        <img loading="lazy" className="dd-th-emerald" src="/Logo/logo-emerald.png" width={45} height={47} alt="" />
       </div>
       {["code", "cloud", "spark", "chart"].map((icon, i) => (
         <span

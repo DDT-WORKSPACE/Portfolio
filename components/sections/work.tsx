@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
+import { ThemedImage } from "@/components/themed-image";
 import { useState } from "react";
 import { Search, X, ArrowUpRight } from "lucide-react";
 import { work } from "@/content/work";
@@ -18,7 +18,7 @@ export function ProjectArt({
 }) {
   return (
     <div className={`project-art has-cover project-color-${index % 3}`}>
-      <Image
+      <ThemedImage
         src={cover.src}
         width={cover.width}
         height={cover.height}
@@ -172,7 +172,7 @@ function ProjectDirectory() {
               key={p.slug}
             >
               <div className={`pd-cover pd-cover-${p.type}`}>
-                <Image
+                <ThemedImage
                   src={p.cover.src}
                   width={p.cover.width}
                   height={p.cover.height}

@@ -6,7 +6,7 @@ import { Contact } from "@/components/sections/contact";
 import { Work } from "@/components/sections/work";
 import { Copy, Marker } from "@/components/ui";
 import { experience } from "@/content/experience";
-import Image from "next/image";
+import { ThemedImage } from "@/components/themed-image";
 export const dynamicParams = false;
 export function generateStaticParams() {
   return industries.map((i) => ({ slug: i.slug }));
@@ -39,7 +39,7 @@ export default async function Industry({
       />
       <section className="section">
         <div className="container industry-detail-v2">
-          <Image
+          <ThemedImage
             src={i.art}
             width={800}
             height={800}

@@ -116,7 +116,8 @@ export function ServiceNetwork() {
       </svg>
       <div className="sn-center">
         <div className="sn-center-rings" />
-        <img src="/Logo/logo.png" alt="" width={55} height={58} />
+        <img className="dd-th-brand" src="/Logo/logo.png" alt="" width={55} height={58} />
+        <img loading="lazy" className="dd-th-emerald" src="/Logo/logo-emerald.png" alt="" width={55} height={58} />
         <span>One connected team</span>
       </div>
       {services.map((s, i) => (

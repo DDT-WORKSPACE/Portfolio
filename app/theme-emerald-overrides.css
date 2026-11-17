@@ -1,0 +1,129 @@
+/* =====================================================================
+   Emerald & gold theme: hand-tuned roles on top of the generated recolour
+   (app/theme-emerald.css). Follows the DDT Figma file:
+   deep green #062121, teal #1F4C4C, gold #876215 / #A67517, page #F3F5F6.
+   Gold carries the calls to action and accent words, green carries structure.
+   ===================================================================== */
+html[data-theme="emerald"] {
+  --em-deep: #062121;
+  --em-deep-2: #0a2c2b;
+  --em-teal: #1f4c4c;
+  --em-teal-2: #2a6663;
+  --em-mint: #4fd1bf;
+  --em-gold: #a67517;
+  --em-gold-text: #876215;
+  --em-gold-bright: #dcab45;
+  --em-gold-soft: #fbf3e3;
+  --em-page: #f3f5f6;
+}
+
+/* Primary buttons are gold, as in the Figma hero and CTA. */
+html[data-theme="emerald"] .dd-btn-primary,
+html[data-theme="emerald"] .button.primary {
+  color: #fff;
+  background: linear-gradient(180deg, #c99634, var(--em-gold) 58%, var(--em-gold-text));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 240, 200, 0.4),
+    0 12px 30px -10px rgba(166, 117, 23, 0.65),
+    0 0 0 1px rgba(135, 98, 21, 0.55);
+}
+html[data-theme="emerald"] .dd-btn-primary:hover,
+html[data-theme="emerald"] .button.primary:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 240, 200, 0.45),
+    0 18px 40px -10px rgba(166, 117, 23, 0.8),
+    0 0 0 1px rgba(135, 98, 21, 0.65);
+}
+html[data-theme="emerald"] .dd-btn-outline:hover {
+  color: var(--em-gold-text);
+  border-color: rgba(166, 117, 23, 0.4);
+}
+
+/* Accent words: gold on light, bright gold on dark. */
+html[data-theme="emerald"] .dd-blue {
+  color: var(--em-gold-text);
+}
+html[data-theme="emerald"] .dd-accent {
+  color: var(--em-gold-bright);
+  text-shadow: 0 0 34px rgba(220, 171, 69, 0.38);
+}
+
+/* Navigation indicator: a thin gold light. */
+html[data-theme="emerald"] .dd-nav-bar {
+  background: linear-gradient(90deg, #4fd1bf, #e9bd5c 55%, #a67517);
+  box-shadow:
+    0 0 12px rgba(233, 189, 92, 0.7),
+    0 0 4px rgba(79, 209, 191, 0.5);
+}
+
+/* Section labels: teal pill with a gold dot. */
+html[data-theme="emerald"] .dd-badge > i {
+  background: var(--em-gold);
+  box-shadow: 0 0 0 3px rgba(166, 117, 23, 0.16);
+}
+
+/* ---------- Dark moments: near-black teal, as in the Figma hero ---------- */
+html[data-theme="emerald"] .dd-hero {
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 64%, rgba(31, 138, 126, 0.3), transparent 70%),
+    radial-gradient(ellipse 110% 62% at 50% -12%, #0f3a37 0%, #062121 46%, #020c0c 100%);
+}
+html[data-theme="emerald"] .dd-hero::after {
+  background: linear-gradient(180deg, transparent, rgba(2, 12, 12, 0.88));
+}
+html[data-theme="emerald"] .dd-page-hero {
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 120%, rgba(31, 138, 126, 0.38), transparent 70%),
+    radial-gradient(ellipse 120% 80% at 50% -10%, #0f3a37 0%, #062121 50%, #020c0c 100%);
+}
+html[data-theme="emerald"] .dd-hero-glow {
+  background:
+    radial-gradient(closest-side, rgba(56, 196, 176, 0.32), transparent),
+    radial-gradient(closest-side at 70% 70%, rgba(220, 171, 69, 0.22), transparent);
+}
+html[data-theme="emerald"] .dd-hero-pill span {
+  background: linear-gradient(180deg, #c99634, var(--em-gold));
+  box-shadow: 0 0 16px rgba(220, 171, 69, 0.45);
+}
+
+/* "Ready to get started" banner: deep green panel with gold light, like the Figma CTA. */
+html[data-theme="emerald"] .dd-banner {
+  background:
+    radial-gradient(ellipse 50% 90% at 50% 0%, rgba(56, 196, 176, 0.24), transparent 70%),
+    radial-gradient(ellipse 34% 80% at 100% 100%, rgba(220, 171, 69, 0.32), transparent 70%),
+    radial-gradient(ellipse 30% 70% at 0% 100%, rgba(166, 117, 23, 0.18), transparent 70%),
+    linear-gradient(120deg, #0a2f2d, #062121 50%, #0b2a26);
+  border: 1px solid rgba(220, 171, 69, 0.22);
+}
+
+/* Photo call to action: deep green tint. */
+html[data-theme="emerald"] .dd-photo {
+  background: #062121;
+}
+html[data-theme="emerald"] .dd-photo-shade::before {
+  background: #0d4a45;
+}
+html[data-theme="emerald"] .dd-photo-shade::after {
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 45%, rgba(4, 40, 38, 0.35), transparent 70%),
+    linear-gradient(180deg, rgba(2, 16, 16, 0.88), rgba(6, 33, 33, 0.74) 50%, rgba(2, 14, 14, 0.92));
+}
+
+/* Footer: deep green fading into dark gold, as in the Figma footer. */
+html[data-theme="emerald"] .dd-footer {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 115%, rgba(166, 117, 23, 0.32), transparent 70%),
+    linear-gradient(180deg, #062121 0%, #041a1a 60%, #1b1a0c 100%);
+}
+html[data-theme="emerald"] .dd-footer-glow {
+  background: radial-gradient(closest-side, rgba(31, 138, 126, 0.3), transparent);
+}
+
+/* Legacy shared buttons (inner-page hero, contact form) use !important in brand.css. */
+html[data-theme="emerald"] .button.primary {
+  background: linear-gradient(180deg, #c99634, #a67517 58%, #876215) !important;
+  color: #fff !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 240, 200, 0.4),
+    0 12px 30px -10px rgba(166, 117, 23, 0.65) !important;
+}

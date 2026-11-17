@@ -23,10 +23,11 @@ export default function NotFound() {
               strokeWidth="2"
               fill="none"
             />
-            <circle cx="150" cy="140" r="5" fill="#FF6A00" />
+            <circle cx="150" cy="140" r="5" style={{ fill: "var(--dd-orange, #FF6A00)" }} />
           </svg>
           <span>
-            <img src="/Logo/logo.png" alt="" width={48} height={50} />
+            <img className="dd-th-brand" src="/Logo/logo.png" alt="" width={48} height={50} />
+            <img loading="lazy" className="dd-th-emerald" src="/Logo/logo-emerald.png" alt="" width={48} height={50} />
           </span>
         </div>
       </div>

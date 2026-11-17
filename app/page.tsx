@@ -1,4 +1,4 @@
-﻿import { StudioHome } from "@/components/sections/studio-home";
+import { HomePage } from "@/components/home/home-page";
 export default function Home() {
-  return <StudioHome />;
+  return <HomePage />;
 }

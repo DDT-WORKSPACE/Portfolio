@@ -6,7 +6,7 @@ const suppliedWork = [
     projectName: "Talent Badger",
     type: "dashboard",
     cover: {
-      src: "/Projects/talentbadger.jpg",
+      src: "/Projects/brand/talentbadger.webp",
       width: 1280,
       height: 853,
       alt: "Talent Badger engineering talent marketplace, shown on desktop and mobile",
@@ -19,7 +19,7 @@ const suppliedWork = [
     projectName: "Renbite",
     type: "mobile",
     cover: {
-      src: "/Projects/renbite.jpg",
+      src: "/Projects/brand/renbite.webp",
       width: 1280,
       height: 960,
       alt: "Renbite coffee-ordering app and its mobile restaurant discovery interface",
@@ -32,7 +32,7 @@ const suppliedWork = [
     projectName: "Crypto Wallet",
     type: "dashboard",
     cover: {
-      src: "/Projects/crypto-wallet.png",
+      src: "/Projects/brand/crypto-wallet.webp",
       width: 1085,
       height: 824,
       alt: "Crypto Wallet dashboard showing asset balances, transactions and a chart",
@@ -45,7 +45,7 @@ const suppliedWork = [
     projectName: "FFP Vault",
     type: "mobile",
     cover: {
-      src: "/Projects/ffp_vault.jpg",
+      src: "/Projects/brand/ffp-vault.webp",
       width: 1280,
       height: 960,
       alt: "FFP Vault financial document and reminder app shown on a phone",
@@ -58,7 +58,7 @@ const suppliedWork = [
     projectName: "BestTrip",
     type: "dashboard",
     cover: {
-      src: "/Projects/besttrip.png",
+      src: "/Projects/brand/besttrip.webp",
       width: 865,
       height: 638,
       alt: "BestTrip travel website with flight search and destination offers",
@@ -71,7 +71,7 @@ const suppliedWork = [
     projectName: "GCL storefront",
     type: "commerce",
     cover: {
-      src: "/Projects/gcl-storefront.webp",
+      src: "/Projects/brand/gcl-storefront.webp",
       width: 1600,
       height: 822,
       alt: "GCL online storefront showing product categories and shopping offers",
@@ -84,7 +84,7 @@ const suppliedWork = [
     projectName: "Elevator Video Pitch",
     type: "dashboard",
     cover: {
-      src: "/Projects/evpitch.jpg",
+      src: "/Projects/brand/evpitch.webp",
       width: 1280,
       height: 853,
       alt: "Elevator Video Pitch recruitment platform on desktop and mobile",
@@ -97,7 +97,7 @@ const suppliedWork = [
     projectName: "Walk Throughz",
     type: "dashboard",
     cover: {
-      src: "/Projects/walkthroughz.jpg",
+      src: "/Projects/brand/walkthroughz.webp",
       width: 1280,
       height: 853,
       alt: "Walk Throughz city exploration platform with walking tours and city guides",
@@ -110,7 +110,7 @@ const suppliedWork = [
     projectName: "Beardfriends",
     type: "mobile",
     cover: {
-      src: "/Projects/beardfriends.jpg",
+      src: "/Projects/brand/beardfriends.webp",
       width: 1280,
       height: 960,
       alt: "Beardfriends mobile barbershop discovery and filtering interface",
@@ -123,7 +123,7 @@ const suppliedWork = [
     projectName: "Shopmart",
     type: "mobile",
     cover: {
-      src: "/Projects/shopmart.jpg",
+      src: "/Projects/brand/shopmart.webp",
       width: 1280,
       height: 960,
       alt: "Shopmart shopping app showing product discovery, categories and fashion collections",

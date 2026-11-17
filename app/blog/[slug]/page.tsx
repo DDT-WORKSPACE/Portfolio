@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { posts } from "@/content/posts";
 import { InnerHero } from "@/components/inner";
 import { Copy } from "@/components/ui";
-import { Insights } from "@/components/sections/editorial";
+import { InsightCard } from "@/components/home/sections";
 export const dynamicParams = false;
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -47,7 +47,25 @@ export default async function Post({
           <MDXRemote source={safeBody} />
         </article>
       </div>
-      <Insights />
+      <section className="dd dd-section dd-insights dd-related">
+        <div className="dd-container">
+          <div className="dd-heading">
+            <span className="dd-badge is-orange">
+              <i aria-hidden="true" />
+              Keep reading
+            </span>
+            <h2>More from the studio</h2>
+          </div>
+          <div className="dd-post-grid is-three">
+            {posts
+              .filter((x) => x.slug !== p.slug)
+              .slice(0, 3)
+              .map((x, i) => (
+                <InsightCard key={x.slug} slug={x.slug} index={i + 1} />
+              ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 }

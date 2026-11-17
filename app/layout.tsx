@@ -1,29 +1,26 @@
 import type { Metadata } from "next";
-import {
-  Bricolage_Grotesque,
-  Instrument_Sans,
-  Geist_Mono,
-} from "next/font/google";
+import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import { Providers } from "@/components/providers";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { ThemeSwitch } from "@/components/theme";
+import { themeScript } from "@/components/theme-script";
 import { site } from "@/content/site";
 import "./globals.css";
 import "./experience.css";
 import "./refinements.css";
 import "./studio.css";
-const display = Bricolage_Grotesque({
+import "./brand.css";
+import "./theme-emerald.css";
+import "./theme-emerald-overrides.css";
+import "./theme-switch.css";
+const display = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  weight: ["700", "800"],
-  preload: false,
-});
-const body = Instrument_Sans({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
+  style: ["normal"],
   preload: true,
 });
 const mono = Geist_Mono({
@@ -57,8 +54,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      className={`${display.variable} ${mono.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body id="top">
         <a className="skip-link" href="#main">
           Skip to content
@@ -67,6 +68,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Header />
           <main id="main">{children}</main>
           <Footer />
+          <ThemeSwitch />
         </Providers>
         {approved && process.env.SITE_URL && (
           <script

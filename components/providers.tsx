@@ -1,6 +1,7 @@
 ﻿"use client";
 import dynamic from "next/dynamic";
 import { NavigationMemory } from "./navigation-memory";
+import { StartProjectProvider } from "./start-project";
 import {
   createContext,
   useContext,
@@ -105,7 +106,7 @@ export function Providers({ children }: { children: ReactNode }) {
   return (
     <HeaderScrollContext.Provider value={header}>
       <NavigationMemory />
-      {children}
+      <StartProjectProvider>{children}</StartProjectProvider>
       {scroll && <ScrollEngine />}
     </HeaderScrollContext.Provider>
   );
