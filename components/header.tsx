@@ -35,6 +35,19 @@ export function Brand() {
   );
 }
 
+// Homepage sections in page order and the navigation item each one lights up.
+// Sections not listed keep the item of the section above them.
+const homeSections: [string, string][] = [
+  ["#hero", "home"],
+  ["#studio", "about"],
+  ["#features", "services"],
+  ["#work", "work"],
+  ["#approach", "about"],
+  ["#integrations", "services"],
+  ["#industries", "industries"],
+  ["#insights", "insights"],
+];
+
 export function Header() {
   const [mobile, setMobile] = useState(false);
   const [menu, setMenu] = useState(false);
@@ -85,12 +98,46 @@ export function Header() {
     ["Insights", "/blog"],
     ["About", "/about"],
   ];
+  // On the homepage the highlight follows the section in view (scroll-spy); elsewhere it follows the page.
+  const [spy, setSpy] = useState("home");
+  useEffect(() => {
+    if (path !== "/") return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const line = innerHeight * 0.4;
+      let current = "home";
+      for (const [selector, item] of homeSections) {
+        const el = document.querySelector(selector);
+        if (el && el.getBoundingClientRect().top <= line) current = item;
+      }
+      setSpy(current);
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    addEventListener("scroll", onScroll, { passive: true });
+    addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(raf);
+      removeEventListener("scroll", onScroll);
+      removeEventListener("resize", onScroll);
+    };
+  }, [path]);
+  const navItem: Record<string, string> = { "/": "home", "/work": "work", "/#industries": "industries", "/blog": "insights", "/about": "about" };
   const active = (href: string) =>
-    href === "/" ? path === "/" : href !== "/#industries" && path.startsWith(href);
-  const servicesActive = path.startsWith("/services");
+    path === "/"
+      ? spy === navItem[href]
+      : href === "/"
+        ? false
+        : href !== "/#industries" && path.startsWith(href);
+  const servicesActive = path === "/" ? spy === "services" : path.startsWith("/services") || path.startsWith("/integrations");
+  const current = (href: string) => (!active(href) ? undefined : path === "/" && href !== "/" ? "location" : "page");
 
   // Sliding indicator under the active (or hovered) navigation item.
   const nav = useRef<HTMLElement>(null);
+  const hovering = useRef(false);
   const [bar, setBar] = useState<{ x: number; w: number; on: boolean }>({ x: 0, w: 0, on: false });
   const placeBar = useCallback((target?: HTMLElement | null) => {
     const root = nav.current;
@@ -102,12 +149,12 @@ export function Header() {
     setBar({ x: r.left - n.left + 16, w: Math.max(12, r.width - 32), on: true });
   }, []);
   useLayoutEffect(() => {
-    placeBar();
+    if (!hovering.current) placeBar();
     const onResize = () => placeBar();
     addEventListener("resize", onResize);
     document.fonts?.ready.then(onResize);
     return () => removeEventListener("resize", onResize);
-  }, [path, placeBar]);
+  }, [path, spy, placeBar]);
   return (
     <>
       <header
@@ -129,16 +176,20 @@ export function Header() {
             ref={nav}
             onMouseOver={(e) => {
               const item = (e.target as HTMLElement).closest<HTMLElement>("[data-nav-item]");
+              hovering.current = true;
               if (item) placeBar(item);
             }}
-            onMouseLeave={() => placeBar()}
+            onMouseLeave={() => {
+              hovering.current = false;
+              placeBar();
+            }}
           >
             <span
               className={`dd-nav-bar ${bar.on ? "is-on" : ""}`}
               style={{ transform: `translateX(${bar.x}px)`, width: bar.w }}
               aria-hidden="true"
             />
-            <Link prefetch={false} href="/" data-nav-item className={active("/") ? "is-active" : ""} aria-current={active("/") ? "page" : undefined}>
+            <Link prefetch={false} href="/" data-nav-item className={active("/") ? "is-active" : ""} aria-current={current("/")}>
               Home
             </Link>
             <div className="dd-nav-drop" ref={drop} onMouseEnter={openMenu} onMouseLeave={leaveMenu}>
@@ -191,7 +242,7 @@ export function Header() {
                 href={href}
                 data-nav-item
                 className={active(href) ? "is-active" : ""}
-                aria-current={active(href) ? "page" : undefined}
+                aria-current={current(href)}
               >
                 {label}
               </Link>

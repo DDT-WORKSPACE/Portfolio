@@ -5850,3 +5850,194 @@ html[data-theme="emerald"] main p.marker > span[aria-hidden="true"] {
   background: currentColor;
   box-shadow: 0 0 0 3px rgba(33, 97, 94, 0.15)
 }
+html[data-theme="emerald"] .dd-solutions-page .is-sky {
+  --tone: #32958f
+}
+html[data-theme="emerald"] .dd-solutions-page .is-navy {
+  --tone: #215a57
+}
+html[data-theme="emerald"] .dd-solutions-page .is-amber {
+  --tone: #e2a428
+}
+html[data-theme="emerald"] .dd-solx-card {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12)
+}
+html[data-theme="emerald"] .dd-solx-card:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: color-mix(in srgb, var(--tone) 60%, rgba(255, 255, 255, 0.2))
+}
+html[data-theme="emerald"] .dd-solx-card-icon {
+  color: #ffffff;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--tone) 70%, #ffffff), var(--tone) 65%);
+  box-shadow: 0 10px 22px -10px color-mix(in srgb, var(--tone) 90%, transparent)
+}
+html[data-theme="emerald"] .dd-solx-card small {
+  color: rgba(255, 255, 255, 0.45)
+}
+html[data-theme="emerald"] .dd-solx-card > span:last-child {
+  color: rgba(214, 234, 233, 0.7)
+}
+html[data-theme="emerald"] .dd-solnav-inner {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--dd-line);
+  box-shadow: 0 16px 36px -22px rgba(16, 68, 66, 0.45)
+}
+html[data-theme="emerald"] .dd-solnav a {
+  color: var(--dd-text)
+}
+html[data-theme="emerald"] .dd-solnav a:hover {
+  color: var(--dd-ink);
+  background: var(--dd-surface)
+}
+html[data-theme="emerald"] .dd-solnav a.is-active {
+  color: #ffffff;
+  background: linear-gradient(180deg, #308f8a, #21615e);
+  box-shadow: 0 8px 18px -8px rgba(33, 97, 94, 0.7)
+}
+html[data-theme="emerald"] .dd-solx {
+  background: #ffffff
+}
+html[data-theme="emerald"] .dd-solx.is-alt {
+  background: var(--dd-surface)
+}
+html[data-theme="emerald"] .dd-solx-icon {
+  color: #ffffff;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--tone) 70%, #ffffff), var(--tone) 65%);
+  box-shadow: 0 14px 28px -12px color-mix(in srgb, var(--tone) 85%, transparent)
+}
+html[data-theme="emerald"] .dd-solx-num {
+  color: var(--tone)
+}
+html[data-theme="emerald"] .dd-solx h2 {
+  color: var(--dd-ink)
+}
+html[data-theme="emerald"] .dd-solx-intro {
+  color: var(--dd-text)
+}
+html[data-theme="emerald"] .dd-solx-main h3 {
+  color: var(--dd-ink)
+}
+html[data-theme="emerald"] .dd-solx-builds li {
+  color: var(--dd-ink)
+}
+html[data-theme="emerald"] .dd-solx-builds svg {
+  color: var(--tone);
+  background: color-mix(in srgb, var(--tone) 12%, #ffffff)
+}
+html[data-theme="emerald"] .dd-solx-outcome {
+  color: var(--dd-ink);
+  background: color-mix(in srgb, var(--tone) 7%, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--tone) 18%, #ffffff)
+}
+html[data-theme="emerald"] .dd-solx-outcome svg {
+  color: var(--tone)
+}
+html[data-theme="emerald"] .dd-solx-work {
+  background: #ffffff;
+  border: 1px solid var(--dd-line)
+}
+html[data-theme="emerald"] .dd-solx-work:hover {
+  border-color: color-mix(in srgb, var(--tone) 35%, transparent);
+  box-shadow: var(--dd-shadow)
+}
+html[data-theme="emerald"] .dd-solx-work small {
+  color: var(--tone)
+}
+html[data-theme="emerald"] .dd-solx-work strong {
+  color: var(--dd-ink)
+}
+html[data-theme="emerald"] .dd-solx-work span {
+  color: var(--dd-text)
+}
+html[data-theme="emerald"] .dd-solx-work svg {
+  color: var(--dd-muted)
+}
+html[data-theme="emerald"] .dd-solx-panel {
+  background: #ffffff;
+  border: 1px solid var(--dd-line);
+  box-shadow: var(--dd-shadow)
+}
+html[data-theme="emerald"] .dd-solx-panel > small {
+  color: var(--dd-muted)
+}
+html[data-theme="emerald"] .dd-solx-flow::before {
+  border-left: 2px dashed color-mix(in srgb, var(--tone) 35%, #ffffff)
+}
+html[data-theme="emerald"] .dd-solx-flow li {
+  color: var(--dd-ink)
+}
+html[data-theme="emerald"] .dd-solx-flow li span {
+  color: #ffffff;
+  background: var(--tone);
+  box-shadow: 0 0 0 5px #ffffff
+}
+html[data-theme="emerald"] .dd-tool-chip {
+  color: var(--dd-ink);
+  background: var(--dd-surface);
+  border: 1px solid var(--dd-line)
+}
+html[data-theme="emerald"] .dd-tool-chip.is-link:hover {
+  background: #ffffff;
+  border-color: color-mix(in srgb, var(--tone) 40%, transparent)
+}
+html[data-theme="emerald"] .dd-tool-go {
+  color: var(--dd-muted)
+}
+html[data-theme="emerald"] .dd-tool-dot {
+  background: color-mix(in srgb, var(--tone) 55%, #ffffff)
+}
+html[data-theme="emerald"] .dd-solx-note {
+  color: var(--dd-muted)
+}
+html[data-theme="emerald"] .dd-tools {
+  background: #ffffff
+}
+html[data-theme="emerald"] .dd-tool-card {
+  background: #ffffff;
+  border: 1px solid var(--dd-line);
+  box-shadow: var(--dd-shadow)
+}
+html[data-theme="emerald"] .dd-tool-card:hover {
+  border-color: rgba(33, 97, 94, 0.25);
+  box-shadow: var(--dd-shadow-lg)
+}
+html[data-theme="emerald"] .dd-tool-logo {
+  background: var(--dd-surface);
+  border: 1px solid var(--dd-line)
+}
+html[data-theme="emerald"] .dd-tool-card-go {
+  color: var(--dd-muted)
+}
+html[data-theme="emerald"] .dd-tool-card:hover .dd-tool-card-go {
+  color: var(--dd-blue)
+}
+html[data-theme="emerald"] .dd-tool-card small {
+  color: var(--dd-muted)
+}
+html[data-theme="emerald"] .dd-tool-card strong {
+  color: var(--dd-ink)
+}
+html[data-theme="emerald"] .dd-tool-card p {
+  color: var(--dd-text)
+}
+html[data-theme="emerald"] .dd-tool-used em {
+  color: var(--tone);
+  background: color-mix(in srgb, var(--tone) 10%, #ffffff)
+}
+html[data-theme="emerald"] .integration-detail > aside > a {
+  color: var(--dd-blue)
+}
+html[data-theme="emerald"] .integration-used-in small {
+  color: var(--dd-muted)
+}
+html[data-theme="emerald"] .integration-detail > aside .integration-used-in a {
+  color: var(--dd-ink);
+  background: #ffffff;
+  border: 1px solid var(--dd-line)
+}
+html[data-theme="emerald"] .integration-detail > aside .integration-used-in a:hover {
+  color: var(--dd-blue);
+  border-color: rgba(33, 97, 94, 0.35)
+}

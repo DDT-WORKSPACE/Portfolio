@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Check, ArrowUpRight } from "lucide-react";
 import { integrations } from "@/content/integrations";
+import { solutionsForTool } from "@/content/solutions";
 import { InnerHero } from "@/components/inner";
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -24,6 +25,7 @@ export default async function IntegrationPage({
   const { slug } = await params;
   const tool = integrations.find((t) => t.slug === slug);
   if (!tool) notFound();
+  const usedIn = solutionsForTool(tool.slug);
   return (
     <>
       <InnerHero
@@ -43,8 +45,18 @@ export default async function IntegrationPage({
             />
             <h2>{tool.name}</h2>
             <p>{tool.category}</p>
+            {usedIn.length > 0 && (
+              <div className="integration-used-in">
+                <small>Part of these solutions</small>
+                {usedIn.map((u) => (
+                  <Link key={u.slug} href={`/integrations#${u.slug}`}>
+                    {u.title}
+                  </Link>
+                ))}
+              </div>
+            )}
             <Link href="/integrations">
-              All integrations <ArrowUpRight size={15} />
+              All solutions and tools <ArrowUpRight size={15} />
             </Link>
           </aside>
           <div>

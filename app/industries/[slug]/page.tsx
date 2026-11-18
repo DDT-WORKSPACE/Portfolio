@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { industries } from "@/content/site";
 import { InnerHero, ShortProcess, RelatedServices } from "@/components/inner";
@@ -55,9 +56,9 @@ export default async function Industry({
                 <span key={t}>{t}</span>
               ))}
             </div>
-            <a className="text-link" href={note.href}>
+            <Link className="text-link" href={note.href}>
               {note.project}
-            </a>
+            </Link>
           </div>
         </div>
       </section>

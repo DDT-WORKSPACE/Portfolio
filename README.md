@@ -28,6 +28,8 @@ One typeface (Plus Jakarta Sans), moderate heading sizes and no italic text anyw
 - Start a project: components/start-project.tsx opens a panel from the header, hero and calls to action. It composes a ready-to-send email in Gmail or the visitor's mail app; nothing is sent by the website.
 - Motion: GSAP ScrollTrigger reveals, parallax, background zoom, path drawing, count-ups and pointer tilt in components/home/motion.ts, driven by data attributes.
 - Site-wide: floating glass header with Home, a sliding active indicator and a services mega menu; dark footer; a dark inner-page hero shared by every route; brand-styled section labels.
+- Solutions page: /integrations presents the five homepage solutions (content/solutions.ts) with what we build, how each flow works, the tools connected and a related service, followed by every tool (content/integrations.ts) and the delivery steps. The homepage solution cards link to their section, and each tool page links back to the solutions it belongs to.
+- Navigation: on the homepage the header highlight follows the section in view. components/navigation-memory.tsx returns visitors to the same place when they go Back. Avoid content-visibility: auto on page sections, because placeholder heights break that.
 - Case studies: app/work/[slug] shows the full mockup and structured content from content/case-studies.ts (overview, challenge, goal, approach, features, expertise, result).
 - The photo behind the call to action is loaded from Unsplash's image CDN (free Unsplash licence, office photo by Proxyclick). To self-host it, download it into public and change the url in app/brand.css.
 
@@ -71,6 +73,19 @@ Reference review and section mapping: docs/studio-reference-review.md. Browser r
 The archived hands PNG, optimized transparent WebP, exact built-in image-generation prompt and former runtime renderer are documented in public/artwork/connection-hands.md. Run node scripts/prepare-studio-art.mjs to rebuild the optimized asset from the saved project PNG. Portfolio logo cleanup provenance is in public/brands/README.md. Actual product-screen crop provenance is in public/previews/README.md; no new generated raster imagery is used in these discipline previews.
 
 Older unmounted homepage sections remain in source for the previous design. Their acceptance scripts are historical; the active browser checks are listed below.
+
+## Email delivery and visitor notifications
+
+Enquiries from the contact form and the Start a project panel are emailed to the studio inbox (devsdevtech@gmail.com, or MAIL_TO). Reply to the email to answer the visitor. Each enquiry also shows the sender's approximate location, IP address and device.
+
+The site also emails the studio about visits (app/api/visit/route.ts and components/visitor-tracker.tsx):
+- New visitor: sent once per browser session with the landing page, referrer and campaign tags, approximate location from the IP address, device, operating system, browser, screen, language, time zone, and a random visitor ID with the visit number.
+- Visitor activity: sent when the visitor hides or leaves the page, listing the pages viewed, the links and buttons clicked, and the time on site.
+- Bots, automated browsers, Do Not Track and Global Privacy Control are skipped. Open the site once with ?notrack=1 on the studio's own devices to stop your own visits being reported; ?track=1 turns it back on.
+- Limits: one arrival and at most six activity emails per session, and at most 40 emails per IP address per hour. VISITOR_EMAILS=off stops visit emails.
+- A website cannot read a hardware device ID or a GPS position without asking the visitor, so the visitor ID is a random ID kept in the browser and the location is city-level, estimated from the IP address. On Vercel the location comes from the platform's geo headers; elsewhere it is looked up at ipapi.co (VISITOR_GEO=off to skip).
+
+Setup (Gmail): turn on 2-Step Verification for the sending Google account, create an App Password, then put SMTP_USER and SMTP_PASS in .env.local locally and in the hosting provider's environment variables. Rebuild after changing them, because whether the Start a project panel sends directly is decided at build time. Without them, enquiries fall back to a Gmail or email-app draft and visit notifications are only written to the server log. Gmail allows roughly 500 sent emails a day; on a busy site use a transactional email service with the same SMTP settings.
 
 ## Contact and integrations
 

@@ -4033,3 +4033,558 @@ main p.marker > span[aria-hidden="true"] {
   box-shadow: 0 0 0 3px rgba(3, 95, 232, 0.15);
 }
 
+
+/* =====================================================================
+   Solutions page (/integrations): five solution areas and the tools behind them
+   ===================================================================== */
+.dd-solutions-page .is-blue {
+  --tone: var(--dd-blue);
+}
+.dd-solutions-page .is-orange {
+  --tone: var(--dd-orange);
+}
+.dd-solutions-page .is-sky {
+  --tone: #2f86ff;
+}
+.dd-solutions-page .is-navy {
+  --tone: #163a8f;
+}
+.dd-solutions-page .is-amber {
+  --tone: #ff9a3d;
+}
+.dd-solutions-page .dd-page-hero {
+  padding-bottom: 72px;
+}
+
+/* Overview cards inside the dark hero */
+.dd-solx-overview {
+  margin: 44px auto 0;
+  max-width: 1160px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  text-align: left;
+}
+.dd-solx-card {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: 18px 18px 20px;
+  border-radius: 20px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition:
+    transform 0.4s var(--dd-ease),
+    background 0.3s,
+    border-color 0.3s;
+}
+.dd-solx-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: color-mix(in srgb, var(--tone) 60%, rgba(255, 255, 255, 0.2));
+}
+.dd-solx-card-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  color: #fff;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--tone) 70%, #fff), var(--tone) 65%);
+  box-shadow: 0 10px 22px -10px color-mix(in srgb, var(--tone) 90%, transparent);
+}
+.dd-solx-card small {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+}
+.dd-solx-card strong {
+  font-size: 15.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.dd-solx-card > span:last-child {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(214, 226, 255, 0.7);
+}
+
+/* Sticky jump links */
+.dd-solnav {
+  position: sticky;
+  top: 98px;
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  padding: 18px 16px 0;
+  margin-bottom: -6px;
+  pointer-events: none;
+}
+.dd-solnav-inner {
+  display: flex;
+  gap: 4px;
+  max-width: 100%;
+  padding: 5px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--dd-line);
+  box-shadow: 0 16px 36px -22px rgba(11, 31, 77, 0.45);
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  pointer-events: auto;
+}
+.dd-solnav-inner::-webkit-scrollbar {
+  display: none;
+}
+.dd-solnav a {
+  flex: none;
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--dd-text);
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
+.dd-solnav a:hover {
+  color: var(--dd-ink);
+  background: var(--dd-surface);
+}
+.dd-solnav a.is-active {
+  color: #fff;
+  background: linear-gradient(180deg, #2a7dff, #035fe8);
+  box-shadow: 0 8px 18px -8px rgba(3, 95, 232, 0.7);
+}
+
+/* One solution */
+.dd-solx {
+  padding: 96px 0;
+  scroll-margin-top: 90px;
+  background: #fff;
+}
+.dd-solx.is-alt {
+  background: var(--dd-surface);
+}
+.dd-solx-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 56px;
+  align-items: start;
+}
+.dd-solx.is-alt .dd-solx-main {
+  order: 2;
+}
+.dd-solx-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.dd-solx-icon {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 17px;
+  color: #fff;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--tone) 70%, #fff), var(--tone) 65%);
+  box-shadow: 0 14px 28px -12px color-mix(in srgb, var(--tone) 85%, transparent);
+}
+.dd-solx-num {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--tone);
+}
+.dd-solx h2 {
+  margin: 20px 0 14px;
+  color: var(--dd-ink);
+}
+.dd-solx-intro {
+  max-width: 600px;
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--dd-text);
+}
+.dd-solx-main h3 {
+  margin: 30px 0 14px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--dd-ink);
+}
+.dd-solx-builds {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 18px;
+}
+.dd-solx-builds li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--dd-ink);
+}
+.dd-solx-builds svg {
+  flex: none;
+  margin-top: 1px;
+  padding: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  color: var(--tone);
+  background: color-mix(in srgb, var(--tone) 12%, #fff);
+}
+.dd-solx-outcome {
+  margin-top: 26px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--dd-ink);
+  background: color-mix(in srgb, var(--tone) 7%, #fff);
+  border: 1px solid color-mix(in srgb, var(--tone) 18%, #fff);
+}
+.dd-solx-outcome svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--tone);
+}
+.dd-solx-actions {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.dd-solx-work {
+  margin-top: 18px;
+  position: relative;
+  display: grid;
+  gap: 2px;
+  max-width: 420px;
+  padding: 14px 44px 14px 18px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid var(--dd-line);
+  transition:
+    border-color 0.3s,
+    box-shadow 0.4s;
+}
+.dd-solx-work:hover {
+  border-color: color-mix(in srgb, var(--tone) 35%, transparent);
+  box-shadow: var(--dd-shadow);
+}
+.dd-solx-work small {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tone);
+}
+.dd-solx-work strong {
+  font-size: 16px;
+  color: var(--dd-ink);
+}
+.dd-solx-work span {
+  font-size: 13.5px;
+  color: var(--dd-text);
+}
+.dd-solx-work svg {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  color: var(--dd-muted);
+}
+
+.dd-solx-side {
+  display: grid;
+  gap: 16px;
+}
+.dd-solx-panel {
+  padding: 24px;
+  border-radius: 24px;
+  background: #fff;
+  border: 1px solid var(--dd-line);
+  box-shadow: var(--dd-shadow);
+}
+.dd-solx-panel > small {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dd-muted);
+}
+.dd-solx-flow {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+.dd-solx-flow::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 16px;
+  bottom: 16px;
+  border-left: 2px dashed color-mix(in srgb, var(--tone) 35%, #fff);
+}
+.dd-solx-flow li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--dd-ink);
+}
+.dd-solx-flow li span {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--tone);
+  box-shadow: 0 0 0 5px #fff;
+}
+.dd-solx-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.dd-tool-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 13px 8px 10px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dd-ink);
+  background: var(--dd-surface);
+  border: 1px solid var(--dd-line);
+}
+.dd-tool-chip img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+.dd-tool-chip.is-link {
+  transition:
+    border-color 0.3s,
+    background 0.3s;
+}
+.dd-tool-chip.is-link:hover {
+  background: #fff;
+  border-color: color-mix(in srgb, var(--tone) 40%, transparent);
+}
+.dd-tool-go {
+  color: var(--dd-muted);
+}
+.dd-tool-dot {
+  width: 8px;
+  height: 8px;
+  margin: 0 5px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--tone) 55%, #fff);
+}
+.dd-solx-note {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--dd-muted);
+}
+
+/* Tool directory */
+.dd-tools {
+  scroll-margin-top: 90px;
+  background: #fff;
+}
+.dd-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.dd-tool-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px;
+  border-radius: 22px;
+  background: #fff;
+  border: 1px solid var(--dd-line);
+  box-shadow: var(--dd-shadow);
+  transition:
+    transform 0.4s var(--dd-ease),
+    border-color 0.3s,
+    box-shadow 0.4s;
+}
+.dd-tool-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(3, 95, 232, 0.25);
+  box-shadow: var(--dd-shadow-lg);
+}
+.dd-tool-logo {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 10px;
+  border-radius: 14px;
+  background: var(--dd-surface);
+  border: 1px solid var(--dd-line);
+}
+.dd-tool-card-go {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  color: var(--dd-muted);
+  transition:
+    transform 0.3s,
+    color 0.3s;
+}
+.dd-tool-card:hover .dd-tool-card-go {
+  color: var(--dd-blue);
+  transform: translate(2px, -2px);
+}
+.dd-tool-card small {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--dd-muted);
+}
+.dd-tool-card strong {
+  font-size: 18px;
+  color: var(--dd-ink);
+}
+.dd-tool-card p {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--dd-text);
+}
+.dd-tool-used {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.dd-tool-used em {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tone);
+  background: color-mix(in srgb, var(--tone) 10%, #fff);
+}
+.dd-solx-cta {
+  margin-top: 56px;
+}
+
+@media (max-width: 1180px) {
+  .dd-solx-overview {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .dd-tools-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 1020px) {
+  .dd-solx-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .dd-solx.is-alt .dd-solx-main {
+    order: 0;
+  }
+  .dd-tools-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .dd-solx-overview {
+    grid-template-columns: 1fr 1fr;
+  }
+  .dd-solx-card:last-child {
+    grid-column: 1 / -1;
+  }
+  .dd-solnav {
+    top: 84px;
+    padding-top: 12px;
+  }
+  .dd-solx {
+    padding: 72px 0;
+  }
+  .dd-solx-builds,
+  .dd-tools-grid {
+    grid-template-columns: 1fr;
+  }
+  .dd-solx-panel {
+    padding: 20px;
+  }
+}
+
+/* Tool detail pages: readable side panel and links back to the solutions */
+.integration-detail > aside p,
+.integration-detail > aside > a {
+  font-size: 14px;
+  font-weight: 500;
+}
+.integration-detail > aside > a {
+  color: var(--dd-blue);
+}
+.integration-used-in {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.integration-used-in small {
+  flex-basis: 100%;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dd-muted);
+}
+.integration-detail > aside .integration-used-in a {
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--dd-ink);
+  background: #fff;
+  border: 1px solid var(--dd-line);
+  transition:
+    border-color 0.3s,
+    color 0.3s;
+}
+.integration-detail > aside .integration-used-in a:hover {
+  color: var(--dd-blue);
+  border-color: rgba(3, 95, 232, 0.35);
+}

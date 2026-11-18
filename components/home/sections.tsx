@@ -556,11 +556,11 @@ export function Process() {
 /* Ecosystem: the systems we build and connect                         */
 /* ------------------------------------------------------------------ */
 const solutions = [
-  { title: "Commerce platforms", body: "Storefronts, catalogues, checkout and order flows.", icon: ShoppingBag, tone: "blue", href: "/services/e-commerce", pos: "tl" },
-  { title: "Email and automation", body: "Follow-ups, notifications and inbox workflows.", icon: Mail, tone: "orange", href: "/services/ai-automation", pos: "tr" },
-  { title: "CRM and sales", body: "Leads, pipelines and customer records in one place.", icon: Users, tone: "sky", href: "/services/apis-integrations", pos: "ml" },
-  { title: "Helpdesk and support", body: "Tickets, chat and AI assistants with human handoff.", icon: Headphones, tone: "navy", href: "/services/ai-automation", pos: "mr" },
-  { title: "Accounting and ERP links", body: "Invoices, payments and stock synced with your tools.", icon: Receipt, tone: "amber", href: "/services/apis-integrations", pos: "bc" },
+  { title: "Commerce platforms", body: "Storefronts, catalogues, checkout and order flows.", icon: ShoppingBag, tone: "blue", href: "/integrations#commerce", pos: "tl" },
+  { title: "Email and automation", body: "Follow-ups, notifications and inbox workflows.", icon: Mail, tone: "orange", href: "/integrations#email", pos: "tr" },
+  { title: "CRM and sales", body: "Leads, pipelines and customer records in one place.", icon: Users, tone: "sky", href: "/integrations#crm", pos: "ml" },
+  { title: "Helpdesk and support", body: "Tickets, chat and AI assistants with human handoff.", icon: Headphones, tone: "navy", href: "/integrations#support", pos: "mr" },
+  { title: "Accounting and ERP links", body: "Invoices, payments and stock synced with your tools.", icon: Receipt, tone: "amber", href: "/integrations#accounting", pos: "bc" },
 ] as const;
 const ringStopsBrand = ["#035fe8", "#2f86ff", "#7db6ff", "#ff9a4d", "#ff6f00", "#1f74ff"];
 // Same ramp through scripts/emerald-palette.mjs for the Emerald & gold theme.
@@ -650,7 +650,7 @@ export function Ecosystem() {
         </div>
         <div className="dd-center-link">
           <Link href="/integrations" className="dd-btn dd-btn-outline">
-            Tools we connect <ArrowUpRight size={16} />
+            Explore solutions and tools <ArrowUpRight size={16} />
           </Link>
         </div>
       </div>

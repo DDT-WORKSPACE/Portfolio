@@ -3274,12 +3274,9 @@ figcaption small {
   color: var(--blue);
 }
 /* Responsive and motion */
-@media (min-width: 769px) {
-  .section:not(.services-section) {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 700px;
-  }
-}
+/* content-visibility: auto was removed from .section: off-screen sections used a 700px
+   placeholder height, so pages changed height while scrolling and Back could not return the
+   visitor to the same place. */
 @media (min-width: 1600px) {
   .hero-inner {
     min-height: 820px;
