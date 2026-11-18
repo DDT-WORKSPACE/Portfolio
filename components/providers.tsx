@@ -13,7 +13,7 @@ import {
 const HeaderScrollContext = createContext({ compact: false, hidden: false });
 export const useHeaderScroll = () => useContext(HeaderScrollContext);
 const ScrollEngine = dynamic(() => import("./scroll-engine"), { ssr: false });
-export function Providers({ children }: { children: ReactNode }) {
+export function Providers({ children, mailReady = false }: { children: ReactNode; mailReady?: boolean }) {
   const [scroll, setScroll] = useState(false);
   const [header, setHeader] = useState({ compact: false, hidden: false });
   const previous = useRef(0);
@@ -106,7 +106,7 @@ export function Providers({ children }: { children: ReactNode }) {
   return (
     <HeaderScrollContext.Provider value={header}>
       <NavigationMemory />
-      <StartProjectProvider>{children}</StartProjectProvider>
+      <StartProjectProvider mailReady={mailReady}>{children}</StartProjectProvider>
       {scroll && <ScrollEngine />}
     </HeaderScrollContext.Provider>
   );

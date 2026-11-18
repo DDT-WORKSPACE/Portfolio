@@ -6,6 +6,8 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ThemeSwitch } from "@/components/theme";
 import { themeScript } from "@/components/theme-script";
+import { VisitorTracker } from "@/components/visitor-tracker";
+import { mailReady } from "@/lib/mail";
 import { site } from "@/content/site";
 import "./globals.css";
 import "./experience.css";
@@ -64,11 +66,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <a className="skip-link" href="#main">
           Skip to content
         </a>
-        <Providers>
+        <Providers mailReady={mailReady()}>
           <Header />
           <main id="main">{children}</main>
           <Footer />
           <ThemeSwitch />
+          <VisitorTracker />
         </Providers>
         {approved && process.env.SITE_URL && (
           <script

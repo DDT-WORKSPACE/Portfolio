@@ -5152,6 +5152,9 @@ html[data-theme="emerald"] .dd-show-frame::after {
     0 0 0 34px rgba(33, 97, 94, 0.035),
     0 0 0 70px rgba(33, 97, 94, 0.025)
 }
+html[data-theme="emerald"] .dd-show-slide[data-ratio="wide"] img {
+  box-shadow: none
+}
 html[data-theme="emerald"] .dd-show-slide img {
   box-shadow:
     0 0 0 1px rgba(16, 68, 66, 0.06),
@@ -5529,6 +5532,26 @@ html[data-theme="emerald"] .dd-modal-field input:focus, html[data-theme="emerald
   border-color: rgba(33, 97, 94, 0.5);
   background: #ffffff;
   box-shadow: 0 0 0 4px rgba(33, 97, 94, 0.12)
+}
+html[data-theme="emerald"] .dd-modal-error {
+  color: #b3232e;
+  background: #fff1f2;
+  border: 1px solid #f5d0d5
+}
+html[data-theme="emerald"] .dd-modal-sent {
+  background: var(--dd-surface);
+  border: 1px solid var(--dd-line)
+}
+html[data-theme="emerald"] .dd-modal-sent-icon {
+  color: #ffffff;
+  background: linear-gradient(160deg, var(--dd-blue-2), var(--dd-blue));
+  box-shadow: 0 14px 30px -12px rgba(33, 97, 94, 0.7)
+}
+html[data-theme="emerald"] .dd-modal-sent h3 {
+  color: var(--dd-ink)
+}
+html[data-theme="emerald"] .dd-modal-sent p {
+  color: var(--dd-text)
 }
 html[data-theme="emerald"] .dd-modal-needs {
   border: 0
