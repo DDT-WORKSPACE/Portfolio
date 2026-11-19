@@ -109,16 +109,6 @@ html[data-theme="emerald"] .dd-photo-shade::after {
     linear-gradient(180deg, rgba(2, 16, 16, 0.88), rgba(6, 33, 33, 0.74) 50%, rgba(2, 14, 14, 0.92));
 }
 
-/* Footer: deep green fading into dark gold, as in the Figma footer. */
-html[data-theme="emerald"] .dd-footer {
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 115%, rgba(166, 117, 23, 0.32), transparent 70%),
-    linear-gradient(180deg, #062121 0%, #041a1a 60%, #1b1a0c 100%);
-}
-html[data-theme="emerald"] .dd-footer-glow {
-  background: radial-gradient(closest-side, rgba(31, 138, 126, 0.3), transparent);
-}
-
 /* Legacy shared buttons (inner-page hero, contact form) use !important in brand.css. */
 html[data-theme="emerald"] .button.primary {
   background: linear-gradient(180deg, #c99634, #a67517 58%, #876215) !important;

@@ -74,6 +74,18 @@ The archived hands PNG, optimized transparent WebP, exact built-in image-generat
 
 Older unmounted homepage sections remain in source for the previous design. Their acceptance scripts are historical; the active browser checks are listed below.
 
+## Footer
+
+components/footer.tsx: a light footer with two soft grooved rings and tool tiles orbiting the outer one (components/footer-orbit.tsx; the rings are static and only the small tiles animate, paused while off screen), a "Let's build something great" card with an availability card and a floating cursor, link columns and a rounded bottom bar. On phones the rings fade out below the card.
+
+## Speed and smooth scrolling
+
+- Unused CSS from the earlier designs is removed with node scripts/purge-css.mjs --write. It follows the import graph from app/ and drops only rules whose class names appear nowhere in that code. Run it after removing components, then node scripts/build-emerald-theme.mjs.
+- Decorative animations pause while their section is off screen, and only transform and opacity are animated (components/offscreen-pause.tsx). During a scroll a transparent shield stops hover effects from restyling cards that pass under the mouse.
+- Lenis smooth scrolling runs on GSAP's ticker, so scroll animations update in the same frame (components/scroll-engine.tsx). Set localStorage dd-smooth to off to compare with native scrolling.
+- The hero 3D scene is built when the browser is idle and its shaders compile asynchronously, so it never delays the first view.
+- Checks: TEST_URL=... node scripts/perf-scroll.mjs / 4 measures scroll frames with the CPU slowed down 4x. node scripts/visual-snapshot.mjs <dir> takes full-page screenshots of the main routes; --compare <a> <b> diffs two runs.
+
 ## Email delivery and visitor notifications
 
 Enquiries from the contact form and the Start a project panel are emailed to the studio inbox (devsdevtech@gmail.com, or MAIL_TO). Reply to the email to answer the visitor. Each enquiry also shows the sender's approximate location, IP address and device.

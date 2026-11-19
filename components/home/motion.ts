@@ -16,6 +16,8 @@ function register() {
  *   data-reveal            fade + rise when entering (data-reveal-delay optional)
  *   data-reveal-group      children with [data-reveal-item] stagger in
  *   data-parallax="0.15"   scrubbed vertical drift (fraction of element height)
+ * Scrubbed effects follow the scroll position directly (scrub: true): the smooth-scroll engine
+ * already eases the scroll, so a second easing layer would only add per-frame catch-up work.
  *   data-count="11"        number counts up when visible
  *   data-draw              svg path draws as it scrolls into view
  *   data-tilt              pointer-driven 3D tilt (fine pointers only)
@@ -93,7 +95,7 @@ export function useScrollMotion(scope: RefObject<HTMLElement | null>) {
               trigger: el.parentElement ?? el,
               start: "top bottom",
               end: "bottom top",
-              scrub: 0.6,
+              scrub: true,
             },
           },
         );
@@ -107,7 +109,7 @@ export function useScrollMotion(scope: RefObject<HTMLElement | null>) {
             scale: 1.04,
             yPercent: 7,
             ease: "none",
-            scrollTrigger: { trigger: el.parentElement ?? el, start: "top bottom", end: "bottom top", scrub: 0.8 },
+            scrollTrigger: { trigger: el.parentElement ?? el, start: "top bottom", end: "bottom top", scrub: true },
           },
         );
       });
@@ -124,7 +126,7 @@ export function useScrollMotion(scope: RefObject<HTMLElement | null>) {
               trigger: path.closest("[data-draw-scope]") ?? path,
               start: "top 80%",
               end: "top 35%",
-              scrub: 0.8,
+              scrub: true,
             },
           },
         );

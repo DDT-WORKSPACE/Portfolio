@@ -1,102 +1,129 @@
 ﻿import Link from "next/link";
-import { ArrowUp, ArrowUpRight, Mail, Globe2, Clock3, MessageCircle } from "lucide-react";
-import { site, industries } from "@/content/site";
+import { ArrowUp, ArrowUpRight, MessageCircle, MapPin, Clock3 } from "lucide-react";
+import { site } from "@/content/site";
 import { Brand } from "./header";
 import { FooterEmail } from "./footer-email";
 import { StartProjectButton } from "./start-project";
+import { FooterOrbit } from "./footer-orbit";
+
+const quick: [string, string][] = [
+  ["Home", "/"],
+  ["About us", "/about"],
+  ["Selected work", "/work"],
+  ["Insights", "/blog"],
+  ["Services", "/services"],
+  ["Solutions", "/integrations"],
+  ["Contact", "/contact"],
+  ["Privacy policy", "/legal/privacy"],
+];
+const serviceLinks: [string, string][] = [
+  ["Web development", "/services/web-development"],
+  ["Mobile apps", "/services/mobile-apps"],
+  ["UI/UX design", "/services/ui-ux-design"],
+  ["AI & automation", "/services/ai-automation"],
+  ["E-commerce", "/services/e-commerce"],
+];
 
 export function Footer() {
   return (
     <footer className="dd-footer">
-      <div className="dd-footer-glow" aria-hidden="true" />
-      <div className="dd-container">
-        <div className="dd-footer-cta">
-          <div>
-            <h2>
-              Have an idea, a product or a process to improve?
-            </h2>
-            <p>Tell us what is happening today and what you want to change.</p>
-          </div>
-          <Link href="/contact" className="dd-btn dd-btn-primary">
-            Let&apos;s talk <ArrowUpRight size={17} />
-          </Link>
-        </div>
+      <FooterOrbit />
 
-        <div className="dd-footer-main">
-          <div className="dd-footer-brand">
+      <div className="dd-container dd-foot-wrap">
+        {/* Let's build something great */}
+        <section className="dd-foot-cta" aria-labelledby="dd-foot-cta-title">
+          <div className="dd-foot-cta-card">
+            <span className="dd-foot-cta-ring is-a" aria-hidden="true" />
+            <span className="dd-foot-cta-ring is-b" aria-hidden="true" />
+            <div className="dd-foot-cta-copy">
+              <small>Let&apos;s build something great</small>
+              <h2 id="dd-foot-cta-title">Ready to start your next project?</h2>
+              <div className="dd-foot-cta-actions">
+                <StartProjectButton className="dd-btn dd-btn-dark">
+                  Start a project <ArrowUpRight size={16} />
+                </StartProjectButton>
+                <Link href="/contact" className="dd-btn dd-btn-glass">
+                  <MessageCircle size={16} /> Contact us
+                </Link>
+              </div>
+            </div>
+            <div className="dd-foot-avail">
+              <span className="dd-foot-avail-tag">
+                <i aria-hidden="true" /> Available for new projects
+              </span>
+              <div className="dd-foot-avail-people" aria-hidden="true">
+                <span className="dd-foot-avail-logo">
+                  <img className="dd-th-brand" src="/Logo/logo.png" width={26} height={27} alt="" />
+                  <img className="dd-th-emerald" src="/Logo/logo-emerald.png" width={26} height={27} alt="" loading="lazy" />
+                </span>
+                <b>+</b>
+                <span className="dd-foot-avail-you">You</span>
+              </div>
+              <strong>Quick 15-minute call</strong>
+              <p>Tell us the idea. We will shape the first step together.</p>
+              <Link href="/contact" className="dd-btn dd-btn-primary dd-btn-sm">
+                Book a free call
+              </Link>
+              <span className="dd-foot-cursor" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24">
+                  <path d="M4 3l15 7-6.5 2L10 19z" fill="currentColor" />
+                </svg>
+                <em>DevsDen</em>
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <div className="dd-foot-main">
+          <div className="dd-foot-brand">
             <Link href="/" aria-label="DevsDen Tech home">
               <Brand />
             </Link>
-            <p>
-              Product design, software development and practical business automation. One connected team, from the
-              first idea to everyday use.
-            </p>
-            <div className="dd-footer-actions">
+            <p>Design, software and automation that move your business forward.</p>
+            <div className="dd-foot-brand-actions">
               <Link href="/contact" className="dd-btn dd-btn-primary dd-btn-sm">
-                <MessageCircle size={16} /> Contact us
+                <MessageCircle size={15} /> Contact us
               </Link>
-              <StartProjectButton className="dd-btn dd-btn-ghost dd-btn-sm">
+              <StartProjectButton className="dd-btn dd-btn-outline dd-btn-sm">
                 Start a project <ArrowUpRight size={15} />
               </StartProjectButton>
             </div>
           </div>
-          <nav aria-label="Footer company">
-            <span>Company</span>
-            <Link href="/about">About us</Link>
-            <Link href="/work">Selected work</Link>
-            <Link href="/blog">Insights</Link>
-            <Link href="/integrations">Integrations</Link>
-            <Link href="/contact">Contact</Link>
+          <nav aria-label="Quick links" className="dd-foot-col">
+            <span>Quick links</span>
+            <div className="dd-foot-links is-two">
+              {quick.map(([label, href]) => (
+                <Link key={href} href={href}>
+                  {label}
+                </Link>
+              ))}
+            </div>
           </nav>
-          <nav aria-label="Footer services">
+          <nav aria-label="Services" className="dd-foot-col">
             <span>Services</span>
-            <Link href="/services/web-development">Web development</Link>
-            <Link href="/services/mobile-apps">Mobile apps</Link>
-            <Link href="/services/ui-ux-design">UI/UX design</Link>
-            <Link href="/services/ai-automation">AI & automation</Link>
-            <Link href="/services">All services</Link>
+            <div className="dd-foot-links">
+              {serviceLinks.map(([label, href]) => (
+                <Link key={href} href={href}>
+                  {label}
+                </Link>
+              ))}
+            </div>
           </nav>
-          <nav aria-label="Footer industries">
-            <span>Industries</span>
-            {industries.slice(0, 5).map((i) => (
-              <Link key={i.slug} href={`/industries/${i.slug}`}>
-                {i.name}
-              </Link>
-            ))}
-          </nav>
-        </div>
-
-        <div className="dd-footer-contact">
-          <div>
-            <span className="dd-footer-ico">
-              <Mail size={18} />
-            </span>
-            <span>
-              <small>Email</small>
+          <div className="dd-foot-col">
+            <span>Get in touch</span>
+            <div className="dd-foot-contact">
               <FooterEmail />
-            </span>
-          </div>
-          <div>
-            <span className="dd-footer-ico">
-              <Globe2 size={18} />
-            </span>
-            <span>
-              <small>Where we work</small>
-              <strong>{site.offices}</strong>
-            </span>
-          </div>
-          <div>
-            <span className="dd-footer-ico">
-              <Clock3 size={18} />
-            </span>
-            <span>
-              <small>Replies</small>
-              <strong>Every enquiry starts with a conversation</strong>
-            </span>
+              <p>
+                <MapPin size={15} /> {site.offices}
+              </p>
+              <p>
+                <Clock3 size={15} /> Every enquiry starts with a conversation
+              </p>
+            </div>
           </div>
         </div>
 
-        <div className="dd-footer-bottom">
+        <div className="dd-foot-bottom">
           <span>
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </span>

@@ -72,9 +72,7 @@ export function Providers({ children, mailReady = false }: { children: ReactNode
     };
   }, []);
   useEffect(() => {
-    let frame = 0;
     const update = () => {
-      frame = 0;
       const y = window.scrollY;
       const next = { compact: y > 40, hidden: y > 600 && y > previous.current };
       previous.current = y;
@@ -82,19 +80,23 @@ export function Providers({ children, mailReady = false }: { children: ReactNode
         old.compact === next.compact && old.hidden === next.hidden ? old : next,
       );
     };
-    const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
+    // Read the scroll position in the scroll event itself (layout is already up to date there);
+    // reading it inside an animation frame could force a style pass after scroll animations write.
+    const onScroll = () => update();
     window.addEventListener("scroll", onScroll, { passive: true });
     update();
     return () => {
       window.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(frame);
     };
   }, []);
   useEffect(() => {
     const start = () => {
+      let off = false;
+      try {
+        off = localStorage.getItem("dd-smooth") === "off";
+      } catch {}
       if (
+        !off &&
         !matchMedia("(prefers-reduced-motion: reduce)").matches &&
         matchMedia("(pointer: fine)").matches
       )

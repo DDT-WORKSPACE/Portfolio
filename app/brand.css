@@ -235,12 +235,6 @@ h4 {
 .dd-heading.is-split h2 {
   margin-bottom: 0;
 }
-.dd-heading-side {
-  max-width: 400px;
-  display: grid;
-  gap: 22px;
-  justify-items: start;
-}
 
 /* ---------- 3D glyphs from the atlas ---------- */
 .dd-glyph {
@@ -587,8 +581,11 @@ h4 {
   margin-left: -11%;
   transform-origin: 50% 0;
   background: linear-gradient(180deg, rgba(90, 160, 255, 0.55), rgba(3, 95, 232, 0.12) 45%, transparent 75%);
-  filter: blur(42px);
+  /* Soft edges from a mask instead of filter: blur(), which is costly on a moving layer. */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 38%, #000 62%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 38%, #000 62%, transparent);
   opacity: 0.55;
+  will-change: transform;
   animation: dd-sway 11s ease-in-out infinite alternate;
 }
 .dd-beams i:nth-child(1) {
@@ -695,7 +692,6 @@ h4 {
   background:
     radial-gradient(closest-side, rgba(77, 155, 255, 0.4), transparent),
     radial-gradient(closest-side at 70% 70%, rgba(255, 111, 0, 0.22), transparent);
-  filter: blur(30px);
   animation: dd-breathe 7s ease-in-out infinite alternate;
 }
 @keyframes dd-breathe {
@@ -1221,10 +1217,11 @@ h4 {
     0 40px 80px -30px rgba(255, 111, 0, 0.55);
   animation-delay: -6s;
 }
+/* Transform-only so the blobs never repaint while they move. */
 @keyframes dd-morph {
   50% {
-    border-radius: 58% 42% 38% 62% / 55% 61% 39% 45%;
     rotate: 12deg;
+    scale: 1.04 0.97;
   }
 }
 .dd-sphere {
@@ -3039,185 +3036,6 @@ button.dd-btn {
 /* =====================================================================
    Footer
    ===================================================================== */
-.dd-footer {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  padding: 80px 0 34px;
-  color: rgba(214, 226, 255, 0.75);
-  background: linear-gradient(180deg, #051028, var(--dd-night));
-}
-.dd-footer-glow {
-  position: absolute;
-  z-index: -1;
-  left: 50%;
-  top: -260px;
-  width: 1200px;
-  height: 520px;
-  translate: -50% 0;
-  background: radial-gradient(closest-side, rgba(3, 95, 232, 0.35), transparent);
-  filter: blur(20px);
-}
-body:has(.dd-home) .dd-footer-cta {
-  display: none;
-}
-body:has(.dd-home) .dd-footer {
-  padding-top: 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-}
-.dd-footer-cta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-  padding: 40px 44px;
-  border-radius: 30px;
-  background:
-    radial-gradient(ellipse 60% 120% at 100% 0%, rgba(255, 111, 0, 0.35), transparent 60%),
-    linear-gradient(120deg, #1f74ff, #035fe8 45%, #0a3aa8);
-  box-shadow: 0 40px 80px -40px rgba(3, 95, 232, 0.8);
-}
-.dd-footer-cta h2 {
-  font-size: clamp(1.5rem, 2.4vw, 2rem);
-  color: #fff;
-  max-width: 620px;
-}
-.dd-footer-cta p {
-  margin-top: 8px;
-  color: rgba(255, 255, 255, 0.82);
-}
-.dd-footer-cta .dd-btn-primary {
-  color: var(--dd-blue);
-  background: #fff;
-  box-shadow: 0 16px 30px -12px rgba(0, 0, 0, 0.45);
-}
-.dd-footer-main {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 40px;
-  padding: 64px 0 44px;
-}
-.dd-footer-brand .dd-brand {
-  color: #fff;
-}
-.dd-footer-brand p {
-  margin-top: 18px;
-  max-width: 340px;
-  font-size: 14.5px;
-  line-height: 1.7;
-  color: rgba(214, 226, 255, 0.68);
-}
-.dd-footer-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 24px;
-}
-.dd-footer-actions .dd-btn-ghost {
-  border-color: rgba(255, 255, 255, 0.24);
-}
-.dd-footer nav {
-  display: grid;
-  gap: 12px;
-  align-content: start;
-}
-.dd-footer nav > span {
-  margin-bottom: 4px;
-  font-size: 15px;
-  font-weight: 650;
-  color: #fff;
-}
-.dd-footer nav a {
-  width: fit-content;
-  font-size: 14.5px;
-  color: rgba(200, 215, 255, 0.68);
-  transition: color 0.25s;
-}
-.dd-footer nav a:hover {
-  color: #fff;
-}
-.dd-footer-contact {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  padding: 22px 26px;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-.dd-footer-contact > div {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-width: 0;
-}
-.dd-footer-ico {
-  width: 46px;
-  height: 46px;
-  flex: none;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  color: #9cc6ff;
-  background: rgba(3, 95, 232, 0.2);
-}
-.dd-footer-contact small {
-  display: block;
-  font-size: 12.5px;
-  color: rgba(200, 215, 255, 0.55);
-}
-.dd-footer-contact strong {
-  font-size: 14.5px;
-  font-weight: 500;
-  color: #fff;
-}
-.dd-footer .footer-email-control {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.dd-footer .footer-address {
-  font-size: 14.5px;
-  color: #fff;
-}
-.dd-footer .footer-email-control button {
-  width: 30px;
-  height: 30px;
-  display: grid;
-  place-items: center;
-  border: 0;
-  border-radius: 50%;
-  color: #cfe0ff;
-  background: rgba(255, 255, 255, 0.08);
-}
-.dd-footer .footer-copy-status {
-  font-size: 12px;
-  color: #9cc6ff;
-}
-.dd-footer-bottom {
-  margin-top: 34px;
-  padding-top: 24px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
-  font-size: 13.5px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-.dd-footer-bottom div {
-  display: flex;
-  gap: 24px;
-}
-.dd-footer-bottom a {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: rgba(200, 215, 255, 0.7);
-}
-.dd-footer-bottom a:hover {
-  color: #fff;
-}
 
 /* =====================================================================
    Case study pages
@@ -3812,19 +3630,6 @@ body:has(.dd-home) .dd-footer {
   .dd-banner-bars {
     opacity: 0.14;
   }
-  .dd-footer-main {
-    grid-template-columns: 1fr 1fr;
-  }
-  .dd-footer-brand {
-    grid-column: 1 / -1;
-  }
-  .dd-footer-contact {
-    grid-template-columns: 1fr;
-  }
-  .dd-footer-cta {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 }
 @media (max-width: 640px) {
   .dd-modal-row {
@@ -3972,12 +3777,6 @@ body:has(.dd-home) .dd-footer {
   }
   .dd-page-lead {
     font-size: 16px;
-  }
-  .dd-footer-main {
-    grid-template-columns: 1fr;
-  }
-  .dd-footer-cta {
-    padding: 30px 24px;
   }
   .dd-to-top {
     right: 16px;
@@ -4587,4 +4386,480 @@ main p.marker > span[aria-hidden="true"] {
 .integration-detail > aside .integration-used-in a:hover {
   color: var(--dd-blue);
   border-color: rgba(3, 95, 232, 0.35);
+}
+
+/* =====================================================================
+   Footer: orbiting rings, "Let's build something great" card, links
+   ===================================================================== */
+.dd-footer {
+  --foot-bg: #f6f8fc;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 120px 0 28px;
+  color: var(--dd-ink);
+  background: var(--foot-bg);
+  border-top: 1px solid var(--dd-line);
+}
+.dd-foot-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+/* Rings: static grooves, only the small tiles move */
+.dd-orbit {
+  --d: max(2100px, 146vw);
+  --gap: 300px;
+  position: absolute;
+  z-index: 0;
+  top: 64px;
+  left: 50%;
+  width: var(--d);
+  height: var(--d);
+  margin-left: calc(var(--d) / -2);
+  pointer-events: none;
+}
+.dd-orbit-ring {
+  position: absolute;
+  border-radius: 50%;
+  background: #e8edf6;
+  box-shadow: inset 0 0 6px rgba(6, 18, 48, 0.16);
+}
+.dd-orbit-ring::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  background: var(--foot-bg);
+}
+.dd-orbit-ring.is-outer {
+  inset: 0;
+}
+.dd-orbit-ring.is-inner {
+  inset: var(--gap);
+}
+.dd-orbit-tile {
+  --r: calc(var(--d) / 2 - 6px);
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  width: 70px;
+  height: 70px;
+  margin: -35px 0 0 -35px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid rgba(11, 31, 77, 0.06);
+  box-shadow:
+    0 14px 28px -14px rgba(11, 31, 77, 0.35),
+    0 2px 6px rgba(11, 31, 77, 0.06);
+  transform: rotate(var(--a)) translateY(calc(var(--r) * -1));
+  animation: dd-orbit 140s linear infinite;
+  animation-play-state: paused;
+  will-change: transform;
+}
+.dd-orbit.is-live .dd-orbit-tile {
+  animation-play-state: running;
+}
+.dd-orbit-tile img {
+  width: 28px;
+  height: 28px;
+  opacity: 0.55;
+}
+@keyframes dd-orbit {
+  from {
+    transform: rotate(var(--a)) translateY(calc(var(--r) * -1));
+  }
+  to {
+    transform: rotate(calc(var(--a) + 360deg)) translateY(calc(var(--r) * -1));
+  }
+}
+
+/* Let's build something great */
+.dd-foot-cta {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 12px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--dd-line);
+  box-shadow: 0 30px 70px -40px rgba(11, 31, 77, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.dd-foot-cta-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 40px;
+  padding: 56px 44px 56px 52px;
+  border-radius: 22px;
+  background:
+    radial-gradient(ellipse 60% 70% at 0% 0%, #ffd7a8, transparent 70%),
+    linear-gradient(135deg, #ffc68c 0%, #ffa24f 52%, #ff8a2b 100%);
+}
+.dd-foot-cta-ring {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  border: 10px solid rgba(255, 111, 0, 0.55);
+}
+.dd-foot-cta-ring.is-a {
+  width: 360px;
+  height: 360px;
+  left: 38%;
+  top: -300px;
+}
+.dd-foot-cta-ring.is-b {
+  width: 460px;
+  height: 460px;
+  right: -60px;
+  bottom: -400px;
+}
+.dd-foot-cta-copy small {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(11, 22, 48, 0.62);
+}
+.dd-foot-cta-copy h2 {
+  margin: 18px 0 30px;
+  max-width: 460px;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: #0b1630;
+}
+.dd-foot-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.dd-btn-dark {
+  color: #fff;
+  background: #0b1630;
+  box-shadow: 0 14px 28px -12px rgba(11, 22, 48, 0.6);
+}
+.dd-btn-dark:hover {
+  transform: translateY(-2px);
+  background: #142449;
+}
+.dd-btn-glass {
+  color: #0b1630;
+  background: rgba(255, 255, 255, 0.45);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+.dd-btn-glass:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.7);
+}
+.dd-foot-avail {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  padding: 22px;
+  border-radius: 18px;
+  background: #fbfaf9;
+  border: 6px solid rgba(255, 255, 255, 0.55);
+  background-clip: padding-box;
+  box-shadow: 0 24px 48px -24px rgba(120, 50, 0, 0.45);
+}
+.dd-foot-avail-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5b6478;
+}
+.dd-foot-avail-tag i {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1fbf6a;
+}
+.dd-foot-avail-tag i::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: rgba(31, 191, 106, 0.22);
+  animation: dd-avail 2s ease-in-out infinite;
+}
+@keyframes dd-avail {
+  50% {
+    transform: scale(1.5);
+    opacity: 0.3;
+  }
+}
+.dd-foot-avail-people {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0 4px;
+}
+.dd-foot-avail-people b {
+  font-weight: 500;
+  color: var(--dd-muted);
+}
+.dd-foot-avail-logo,
+.dd-foot-avail-you {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+.dd-foot-avail-logo {
+  background: #fff;
+  border: 1px solid var(--dd-line);
+}
+.dd-foot-avail-you {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  background: #0b1630;
+}
+.dd-foot-avail strong {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0b1630;
+}
+.dd-foot-avail p {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--dd-text);
+}
+.dd-foot-avail .dd-btn {
+  width: 100%;
+}
+.dd-foot-cursor {
+  position: absolute;
+  right: -34px;
+  top: 38%;
+  display: flex;
+  align-items: flex-start;
+  color: #0b1630;
+  animation: dd-cursor 6s ease-in-out infinite;
+}
+.dd-foot-cursor em {
+  margin: 14px 0 0 -4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #0b1630;
+}
+@keyframes dd-cursor {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  35% {
+    transform: translate(-14px, 10px);
+  }
+  70% {
+    transform: translate(6px, -8px);
+  }
+}
+
+/* Links */
+.dd-foot-main {
+  margin-top: 96px;
+  display: grid;
+  grid-template-columns: 1.25fr 1.15fr 0.85fr 1fr;
+  gap: 40px;
+}
+.dd-foot-brand p {
+  margin-top: 16px;
+  max-width: 300px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--dd-text);
+}
+.dd-foot-brand-actions {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.dd-foot-col > span {
+  display: block;
+  margin-bottom: 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dd-muted);
+}
+.dd-foot-links {
+  display: grid;
+  gap: 12px;
+}
+.dd-foot-links.is-two {
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+}
+.dd-foot-links a {
+  width: fit-content;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--dd-ink);
+  transition: color 0.25s;
+}
+.dd-foot-links a:hover {
+  color: var(--dd-blue);
+}
+.dd-foot-contact {
+  display: grid;
+  gap: 12px;
+}
+.dd-foot-contact p {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--dd-text);
+}
+.dd-foot-contact p svg {
+  flex: none;
+  margin-top: 3px;
+  color: var(--dd-blue);
+}
+.dd-footer .footer-email-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dd-footer .footer-address {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--dd-ink);
+}
+.dd-footer .footer-email-control button {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  color: var(--dd-text);
+  background: #fff;
+  border: 1px solid var(--dd-line);
+}
+.dd-footer .footer-copy-status {
+  font-size: 12px;
+  color: var(--dd-blue);
+}
+.dd-foot-bottom {
+  margin-top: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  font-size: 14px;
+  color: var(--dd-text);
+  background: rgba(11, 31, 77, 0.03);
+  border: 1px solid var(--dd-line);
+}
+.dd-foot-bottom div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.dd-foot-bottom a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--dd-ink);
+}
+.dd-foot-bottom a:hover {
+  color: var(--dd-blue);
+}
+
+@media (max-width: 1020px) {
+  .dd-foot-cta-card {
+    grid-template-columns: 1fr;
+    padding: 40px 30px;
+  }
+  .dd-foot-cursor {
+    right: 10px;
+    top: -18px;
+  }
+  .dd-foot-main {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .dd-footer {
+    padding-top: 80px;
+  }
+  .dd-orbit {
+    --d: max(1500px, 380vw);
+    --gap: 220px;
+    top: 30px;
+    -webkit-mask-image: linear-gradient(180deg, #000 0, #000 520px, transparent 760px);
+    mask-image: linear-gradient(180deg, #000 0, #000 520px, transparent 760px);
+  }
+  .dd-foot-cursor {
+    display: none;
+  }
+  .dd-orbit-tile {
+    width: 56px;
+    height: 56px;
+    margin: -28px 0 0 -28px;
+    border-radius: 15px;
+  }
+  .dd-foot-cta-card {
+    padding: 32px 22px;
+  }
+  .dd-foot-main {
+    margin-top: 64px;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .dd-foot-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dd-orbit-tile,
+  .dd-foot-cursor,
+  .dd-foot-avail-tag i::after {
+    animation: none;
+  }
+}
+
+/* Decorative animations pause while their section is off screen (components/offscreen-pause.tsx). */
+[data-offscreen],
+[data-offscreen] *,
+[data-offscreen] *::before,
+[data-offscreen] *::after {
+  animation-play-state: paused !important;
+}
+.dd-scroll-shield {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: none;
+}
+.dd-scroll-shield.is-on {
+  display: block;
 }

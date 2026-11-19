@@ -102,28 +102,31 @@ export function Header() {
   const [spy, setSpy] = useState("home");
   useEffect(() => {
     if (path !== "/") return;
-    let raf = 0;
-    const update = () => {
-      raf = 0;
-      const line = innerHeight * 0.4;
+    // A thin line 40% down the screen: the section crossing it is the one being read.
+    // IntersectionObserver keeps this off the scroll path (no layout reads per frame).
+    const els = homeSections
+      .map(([selector, item]) => [document.querySelector<HTMLElement>(selector), item] as const)
+      .filter((pair): pair is readonly [HTMLElement, string] => !!pair[0]);
+    const above = new Set<HTMLElement>();
+    const pick = () => {
       let current = "home";
-      for (const [selector, item] of homeSections) {
-        const el = document.querySelector(selector);
-        if (el && el.getBoundingClientRect().top <= line) current = item;
-      }
+      for (const [el, item] of els) if (above.has(el)) current = item;
       setSpy(current);
     };
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update);
-    };
-    update();
-    addEventListener("scroll", onScroll, { passive: true });
-    addEventListener("resize", onScroll);
-    return () => {
-      cancelAnimationFrame(raf);
-      removeEventListener("scroll", onScroll);
-      removeEventListener("resize", onScroll);
-    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          const el = e.target as HTMLElement;
+          // A section counts once its top has passed the line (it is crossing or above it).
+          if (e.isIntersecting || e.boundingClientRect.top < e.rootBounds!.top) above.add(el);
+          else above.delete(el);
+        }
+        pick();
+      },
+      { rootMargin: "-40% 0px -60% 0px" },
+    );
+    els.forEach(([el]) => io.observe(el));
+    return () => io.disconnect();
   }, [path]);
   const navItem: Record<string, string> = { "/": "home", "/work": "work", "/#industries": "industries", "/blog": "insights", "/about": "about" };
   const active = (href: string) =>

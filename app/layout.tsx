@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer";
 import { ThemeSwitch } from "@/components/theme";
 import { themeScript } from "@/components/theme-script";
 import { VisitorTracker } from "@/components/visitor-tracker";
+import { OffscreenPause } from "@/components/offscreen-pause";
 import { mailReady } from "@/lib/mail";
 import { site } from "@/content/site";
 import "./globals.css";
@@ -72,6 +73,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Footer />
           <ThemeSwitch />
           <VisitorTracker />
+          <OffscreenPause />
         </Providers>
         {approved && process.env.SITE_URL && (
           <script
