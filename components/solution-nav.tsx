@@ -1,51 +1,52 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { solutions } from "@/content/solutions";
+import { useActiveSection } from "./section-navigation";
 
-/** Sticky jump links for /integrations that highlight the section currently in view. */
-export function SolutionNav({ items }: { items: { id: string; label: string }[] }) {
-  const [current, setCurrent] = useState(items[0]?.id ?? "");
+const items = [
+  ...solutions.map(({ slug, title }) => ({ id: slug, label: title })),
+  { id: "tools", label: "All tools" },
+];
+
+export function SolutionNav() {
+  const { current, started } = useActiveSection(items, 136);
   const bar = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let raf = 0;
-    const update = () => {
-      raf = 0;
-      const line = innerHeight * 0.35;
-      let id = items[0]?.id ?? "";
-      for (const it of items) {
-        const el = document.getElementById(it.id);
-        if (el && el.getBoundingClientRect().top <= line) id = it.id;
-      }
-      setCurrent(id);
-    };
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update);
-    };
-    update();
-    addEventListener("scroll", onScroll, { passive: true });
-    addEventListener("resize", onScroll);
-    return () => {
-      cancelAnimationFrame(raf);
-      removeEventListener("scroll", onScroll);
-      removeEventListener("resize", onScroll);
-    };
-  }, [items]);
-
-  // Keep the active pill visible when the bar scrolls sideways on small screens.
-  useEffect(() => {
-    const el = bar.current?.querySelector<HTMLElement>(".is-active");
     const root = bar.current;
-    if (!el || !root || root.scrollWidth <= root.clientWidth) return;
-    root.scrollTo({ left: el.offsetLeft - root.clientWidth / 2 + el.offsetWidth / 2, behavior: "smooth" });
-  }, [current]);
+    const link = root?.querySelector<HTMLElement>('[aria-current="location"]');
+    if (!link || !root || !started || root.scrollWidth <= root.clientWidth)
+      return;
+    const track = root.getBoundingClientRect();
+    const item = link.getBoundingClientRect();
+    if (item.left >= track.left + 5 && item.right <= track.right - 5) return;
+    root.scrollTo({
+      left:
+        root.scrollLeft +
+        item.left -
+        track.left +
+        (item.width - track.width) / 2,
+      behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "instant"
+        : "smooth",
+    });
+  }, [current, started]);
 
   return (
-    <nav className="dd-solnav" aria-label="Solutions on this page">
-      <div className="dd-solnav-inner" ref={bar}>
-        {items.map((it) => (
-          <a key={it.id} href={`#${it.id}`} className={current === it.id ? "is-active" : ""} aria-current={current === it.id ? "location" : undefined}>
-            {it.label}
+    <nav
+      className="dd-solnav"
+      aria-label="Solutions on this page"
+      hidden={!started}
+    >
+      <div className="dd-solnav-inner" ref={bar} data-lenis-prevent-horizontal>
+        {items.map(({ id, label }) => (
+          <a
+            key={id}
+            href={`#${id}`}
+            aria-current={current === id ? "location" : undefined}
+          >
+            {label}
           </a>
         ))}
       </div>

@@ -7,6 +7,7 @@ import { useHeaderScroll } from "./providers";
 import { services } from "@/content/services";
 import { Glyph, type GlyphName } from "./home/glyph";
 import { useStartProject } from "./start-project";
+import { SolutionNav } from "./solution-nav";
 
 const serviceGlyph: Record<string, GlyphName> = {
   code: "web",
@@ -41,6 +42,7 @@ const homeSections: [string, string][] = [
   ["#hero", "home"],
   ["#studio", "about"],
   ["#features", "services"],
+  ["#disciplines", "services"],
   ["#work", "work"],
   ["#approach", "about"],
   ["#integrations", "services"],
@@ -53,6 +55,8 @@ export function Header() {
   const [menu, setMenu] = useState(false);
   const path = usePathname();
   const { compact, hidden } = useHeaderScroll();
+  const solutionsPage = path === "/integrations";
+  const lightHero = path === "/work" || /^\/(services|industries|starting-points)\//.test(path);
   const close = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [far, setFar] = useState(false);
   useEffect(() => {
@@ -161,7 +165,7 @@ export function Header() {
   return (
     <>
       <header
-        className={`dd-header ${compact ? "is-solid" : ""} ${hidden && !mobile && !menu ? "is-hidden" : ""} ${mobile ? "is-open" : ""}`}
+        className={`dd-header ${compact || lightHero ? "is-solid" : ""} ${hidden && !solutionsPage && !mobile && !menu ? "is-hidden" : ""} ${mobile ? "is-open" : ""}`}
         onKeyDown={(e) => {
           if (e.key === "Escape") {
             setMobile(false);
@@ -266,6 +270,7 @@ export function Header() {
             </button>
           </div>
         </div>
+        {solutionsPage && !mobile && <SolutionNav />}
         {mobile && (
           <nav id="dd-mobile-nav" className="dd-mobile-nav" aria-label="Mobile navigation" data-lenis-prevent>
             {[["Home", "/"], ["Services", "/services"], ...links, ["Contact", "/contact"]].map(([label, href]) => (

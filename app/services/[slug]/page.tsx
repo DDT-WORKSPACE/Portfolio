@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { services } from "@/content/services";
-import { InnerHero, RelatedServices } from "@/components/inner";
 import { ServiceDetail } from "@/components/service-detail";
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -24,11 +23,5 @@ export default async function ServicePage({
   const { slug } = await params;
   const s = services.find((s) => s.slug === slug);
   if (!s) notFound();
-  return (
-    <>
-      <InnerHero marker={s.name} title={s.name} body={s.promise} />
-      <ServiceDetail service={s} />
-      <RelatedServices exclude={s.slug} />
-    </>
-  );
+  return <ServiceDetail service={s} />;
 }

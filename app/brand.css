@@ -3683,16 +3683,40 @@ button.dd-btn {
     grid-template-columns: 1fr;
   }
   .dd-stats {
-    padding: 18px 6px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 5px;
+    padding: 6px 5px;
+    border-radius: 15px;
   }
   .dd-stat {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 4px 14px;
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    min-width: 0;
+    align-items: center;
+    gap: 3px 7px;
+    padding: 3px 7px;
+  }
+  .dd-stat > div {
+    display: contents;
+  }
+  .dd-stat-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+  }
+  .dd-stat-icon svg {
+    width: 15px;
+    height: 15px;
   }
   .dd-stat strong {
-    font-size: 26px;
+    font-size: 1.2rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .dd-stat small {
+    grid-column: 1 / -1;
+    margin-top: 0;
+    font-size: 0.75rem;
+    line-height: 1.25;
   }
   .dd-marquee-set {
     gap: 48px;
@@ -3916,25 +3940,31 @@ main p.marker > span[aria-hidden="true"] {
   color: rgba(214, 226, 255, 0.7);
 }
 
-/* Sticky jump links */
+/* Contextual links docked to the fixed header on the solutions page. */
 .dd-solnav {
-  position: sticky;
-  top: 98px;
-  z-index: 40;
-  display: flex;
-  justify-content: center;
-  padding: 18px 16px 0;
-  margin-bottom: -6px;
-  pointer-events: none;
+  position: relative;
+  width: min(100% - 32px, 1220px);
+  margin: -1px auto 0;
+  pointer-events: auto;
+}
+.dd-solnav[hidden] {
+  display: none;
+}
+.dd-header:has(.dd-solnav:not([hidden])) .dd-header-inner {
+  z-index: 2;
+  border-radius: 23px 23px 0 0;
+  box-shadow: none;
 }
 .dd-solnav-inner {
   display: flex;
+  justify-content: safe center;
   gap: 4px;
-  max-width: 100%;
-  padding: 5px;
+  width: 100%;
+  padding: 5px 12px;
   overflow-x: auto;
+  overscroll-behavior-inline: contain;
   scrollbar-width: none;
-  border-radius: 999px;
+  border-radius: 0 0 23px 23px;
   background: rgba(255, 255, 255, 0.88);
   border: 1px solid var(--dd-line);
   box-shadow: 0 16px 36px -22px rgba(11, 31, 77, 0.45);
@@ -3947,7 +3977,7 @@ main p.marker > span[aria-hidden="true"] {
 }
 .dd-solnav a {
   flex: none;
-  padding: 9px 16px;
+  padding: 7px 13px;
   border-radius: 999px;
   font-size: 13.5px;
   font-weight: 600;
@@ -3961,12 +3991,6 @@ main p.marker > span[aria-hidden="true"] {
   color: var(--dd-ink);
   background: var(--dd-surface);
 }
-.dd-solnav a.is-active {
-  color: #fff;
-  background: linear-gradient(180deg, #2a7dff, #035fe8);
-  box-shadow: 0 8px 18px -8px rgba(3, 95, 232, 0.7);
-}
-
 /* One solution */
 .dd-solx {
   padding: 96px 0;
@@ -4331,8 +4355,10 @@ main p.marker > span[aria-hidden="true"] {
     grid-column: 1 / -1;
   }
   .dd-solnav {
-    top: 84px;
-    padding-top: 12px;
+    width: calc(100% - 20px);
+  }
+  .dd-solnav-inner {
+    padding-inline: 8px;
   }
   .dd-solx {
     padding: 72px 0;

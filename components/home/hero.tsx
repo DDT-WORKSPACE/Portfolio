@@ -94,11 +94,6 @@ export function HomeHero() {
       </div>
 
       <div className="dd-container dd-hero-copy">
-        <Link href="/work/talentbadger" className="dd-hero-pill">
-          <span>New case study</span>
-          Inside the Talent Badger marketplace
-          <ArrowRight size={14} />
-        </Link>
         <h1>
           Digital products and automation{" "}
           <br />

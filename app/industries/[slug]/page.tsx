@@ -1,71 +1,116 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
 import { industries } from "@/content/site";
-import { InnerHero, ShortProcess, RelatedServices } from "@/components/inner";
-import { Contact } from "@/components/sections/contact";
-import { Work } from "@/components/sections/work";
-import { Copy, Marker } from "@/components/ui";
-import { experience } from "@/content/experience";
-import { ThemedImage } from "@/components/themed-image";
+import { industryGuides } from "@/content/industry-guides";
+import { services } from "@/content/services";
+import { work } from "@/content/work";
+import { caseStudies } from "@/content/case-studies";
+import {
+  EditorialContact,
+  EditorialContent,
+  EditorialHero,
+  EditorialLinks,
+  EditorialRows,
+  EditorialSection,
+} from "@/components/editorial-detail";
+
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return industries.map((i) => ({ slug: i.slug }));
+  return industries.map(({ slug }) => ({ slug }));
 }
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const i = industries.find((i) => i.slug === slug);
-  return { title: i?.name, description: i?.description };
+  const industry = industries.find((item) => item.slug === slug);
+  return { title: industry?.name, description: industryGuides[slug]?.intro };
 }
+
 export default async function Industry({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const i = industries.find((i) => i.slug === slug);
-  if (!i) notFound();
-  const note =
-    experience.industryNotes[industries.findIndex((ind) => ind.slug === slug)];
+  const industry = industries.find((item) => item.slug === slug);
+  const guide = industryGuides[slug];
+  if (!industry || !guide) notFound();
+  const project = work.find((item) => item.slug === guide.project);
+
   return (
-    <>
-      <InnerHero
-        marker={i.name}
-        title={i.description.replace(/\.$/, "")}
-        body="One connected team to help you understand the opportunity, design the experience and build the right product."
-      />
-      <section className="section">
-        <div className="container industry-detail-v2">
-          <ThemedImage
-            src={i.art}
-            width={800}
-            height={800}
-            alt={`${i.name} product illustration`}
-            sizes="(max-width:767px) 100vw, 400px"
-          />
-          <div>
-            <Marker>the opportunity</Marker>
-            <h2>{i.description}</h2>
-            <p>{note.body}</p>
-            <div className="industry-tags">
-              {note.tags.map((t) => (
-                <span key={t}>{t}</span>
-              ))}
-            </div>
-            <Link className="text-link" href={note.href}>
-              {note.project}
+    <div className="ed-page ed-industry">
+      <EditorialHero
+        parent={{ label: "Industries", href: "/#industries" }}
+        title={industry.name}
+        description={guide.intro}
+      >
+        <aside className="ed-brief">
+          <strong>Where we can help</strong>
+          <ul>
+            {guide.work.map(({ title }) => (
+              <li key={title}>{title}</li>
+            ))}
+          </ul>
+        </aside>
+      </EditorialHero>
+      <EditorialContent
+        anchors={[
+          { id: "opportunities", label: "What we build" },
+          ...(project ? [{ id: "example", label: "Portfolio example" }] : []),
+          { id: "planning", label: "Planning a project" },
+          { id: "related", label: "Related services" },
+        ]}
+      >
+        <EditorialSection
+          id="opportunities"
+          title={`What we build for ${industry.name.toLowerCase()}`}
+        >
+          <p>{guide.context}</p>
+          <EditorialRows rows={guide.work} />
+        </EditorialSection>
+        {project && (
+          <EditorialSection id="example" title="Portfolio example">
+            <Link className="ed-project-example" href={`/work/${project.slug}`}>
+              <Image
+                {...project.cover}
+                sizes="(max-width: 700px) 92vw, 400px"
+              />
+              <div>
+                <h3>{project.projectName}</h3>
+                <p>{caseStudies[project.slug].summary}</p>
+                <span>Read case study</span>
+              </div>
             </Link>
-          </div>
-        </div>
-      </section>
-      <ShortProcess />
-      <RelatedServices />
-      <Work />
-      <Contact />
-    </>
+          </EditorialSection>
+        )}
+        <EditorialSection id="planning" title="Planning a project">
+          <p>{guide.priorities}</p>
+        </EditorialSection>
+        <EditorialSection id="related" title="Related services">
+          <EditorialLinks
+            links={guide.serviceSlugs.map((serviceSlug) => {
+              const service = services.find(
+                (item) => item.slug === serviceSlug,
+              )!;
+              return {
+                href: `/services/${service.slug}`,
+                title: service.name,
+                description: service.promise,
+              };
+            })}
+          />
+        </EditorialSection>
+        <EditorialContact
+          title="Tell us what needs to change"
+          text="Share the users, systems and workflow you need to bring together."
+          href={`/contact?type=${guide.type}&brief=${encodeURIComponent(`I’m planning a project in ${industry.name}. `)}`}
+        />
+      </EditorialContent>
+    </div>
   );
 }

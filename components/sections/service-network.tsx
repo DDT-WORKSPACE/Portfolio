@@ -210,7 +210,6 @@ export function ServiceNetwork() {
           </Link>
         </div>
       )}
-      <p className="sn-help">Hover, focus or tap a service to explore.</p>
     </div>
   );
 }

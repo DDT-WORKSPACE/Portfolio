@@ -49,13 +49,13 @@ export type CaseStudy = {
 export const caseStudies: Record<string, CaseStudy> = {
   talentbadger: {
     summary:
-      "A curated marketplace that connects companies with vetted, senior-level engineers, designers and domain experts for complex product work.",
+      "A marketplace for finding senior engineering specialists or assembling a team for a specific project.",
     platform: "Responsive web platform",
     expertise: ["Product strategy", "UX and UI design", "Web development", "Marketplace UX", "Cloud deployment"],
     tech: ["Next.js", "Node.js", "MongoDB", "AWS", "Docker", "Kubernetes"],
     challenge:
       "Advanced engineering work such as embedded firmware, medical device design and industrial controls is hard to describe and harder to staff. Companies needed a fast way to find proven specialists, and specialists needed a credible place to be found. The product had to communicate deep expertise without making the first step feel complicated.",
-    goal: "Create a seamless platform that helps companies quickly find and collaborate with vetted engineering specialists.",
+    goal: "Help a hiring team identify the right area of expertise and choose between a single specialist and a team.",
     approach: [
       {
         title: "Separate the two journeys",
@@ -70,8 +70,8 @@ export const caseStudies: Record<string, CaseStudy> = {
         body: "Senior-only positioning, milestone-gated engagement and clear time-to-hire cues sit right below the headline.",
       },
       {
-        title: "Ship one experience on every screen",
-        body: "The same positioning and primary actions carry from desktop to mobile on a modern, scalable stack.",
+        title: "Carry the same choices onto mobile",
+        body: "The phone layout retains the specialist and team entry points, with domains visible directly below.",
       },
     ],
     features: [
@@ -85,7 +85,7 @@ export const caseStudies: Record<string, CaseStudy> = {
   },
   evpitch: {
     summary:
-      "A global platform where jobseekers stand out with short video pitches and recruiters find the right people faster.",
+      "A recruitment site built around short video introductions, with separate routes for candidates, recruiters and employers.",
     platform: "Responsive web platform",
     expertise: ["Product design", "UX research", "Web development", "Video workflows", "Matching logic"],
     challenge:
@@ -129,10 +129,10 @@ export const caseStudies: Record<string, CaseStudy> = {
       "Travel inspiration is everywhere, but it is fragmented across maps, blogs and booking sites. Walk Throughz needed to turn that inspiration into a practical route, the right walk in the right neighbourhood, on any device.",
     goal: "Help travellers discover and experience cities in a more engaging and authentic way.",
     approach: [
-      { title: "Discovery and planning", body: "Understanding the goals, the audience and the features that matter most." },
-      { title: "UI and UX design", body: "A clean, intuitive and atmospheric design for web and mobile." },
-      { title: "Development", body: "Building the platform with modern technologies and optimised performance." },
-      { title: "Testing and launch", body: "Checking quality, fixing issues and deploying for real users." },
+      { title: "Start with the city", body: "City search gives visitors with a destination in mind a direct way to find relevant walks." },
+      { title: "Make routes easy to compare", body: "Route cards use a photo and a short description to show what the walk covers before someone opens it." },
+      { title: "Keep guides and walks close", body: "Local recommendations give visitors things to do around a route, while city guides provide context for planning." },
+      { title: "Prioritize the route on mobile", body: "The smaller layout keeps discovery and route content within reach for someone browsing while travelling." },
     ],
     features: [
       { icon: "route", title: "Curated walking routes", body: "Handpicked routes for every city and interest." },
@@ -146,12 +146,12 @@ export const caseStudies: Record<string, CaseStudy> = {
       "A go-to platform for travellers who want to explore cities in a more meaningful way, combining strong visuals, useful information and a smooth experience.",
   },
   renbite: {
-    summary: "A coffee and food-ordering app for finding nearby favourites, ordering and tracking in a few taps.",
+    summary: "A coffee and food-ordering app with nearby restaurants, favourites and order tracking.",
     platform: "iOS and Android app",
     expertise: ["Mobile UX and UI", "App development", "Ordering and payments", "Order tracking"],
     challenge:
       "Ordering coffee should take seconds, but discovery, menus, payment and order status often live in separate places. The app had to support a quick repeat order as well as an open-ended browse on a small screen.",
-    goal: "Make the everyday coffee moment faster: discover, order and pay without friction.",
+    goal: "Let customers move from a nearby recommendation or a saved favourite to checkout and order status.",
     approach: [
       { title: "Start from the moment", body: "A friendly greeting and a search for what you feel like today open every session." },
       { title: "Discovery that narrows", body: "Categories, nearby restaurants and recommendations move a browse towards a choice." },
@@ -173,7 +173,7 @@ export const caseStudies: Record<string, CaseStudy> = {
     expertise: ["Mobile UX and UI", "Reminder workflows", "Secure storage", "Authentication"],
     challenge:
       "Loans, housing costs, insurance and documents are scattered across inboxes and drawers, so due dates get missed. The product had to make dates visible without feeling like a banking app, and treat personal information with care.",
-    goal: "Organise. Track. Secure. Help people keep their financial life in one calm, organised place.",
+    goal: "Bring upcoming due dates and the records behind them into the same mobile view.",
     approach: [
       { title: "Calendar first", body: "The month view and upcoming reminders make commitments visible at a glance." },
       { title: "Status you can read", body: "Paid automatically and manual action required are clearly separated." },
@@ -195,11 +195,11 @@ export const caseStudies: Record<string, CaseStudy> = {
     expertise: ["UX and UI design", "Web development", "Search UX", "Campaign components"],
     challenge:
       "Travellers compare dates, routes and services across several sites. For many customers a trip also involves Umrah packages or visa support, which most booking sites treat separately.",
-    goal: "Make planning a trip feel like one task: search, compare and explore offers in one place.",
+    goal: "Keep flight search prominent and give visitors clear paths into hotels, Umrah packages and visa support.",
     approach: [
       { title: "Search first", body: "Trip type, travellers, cabin, route and dates sit together in one prominent panel." },
       { title: "Services side by side", body: "Flight, Umrah, Hotel and Visa tabs keep every travel need one click away." },
-      { title: "Inspiration that sells", body: "Seasonal offers and destination cards give visitors reasons to explore." },
+      { title: "Room for destination browsing", body: "Seasonal offers and destination cards sit below search for travellers who have yet to choose a route." },
       { title: "Clear actions", body: "One strong search action, separated from supporting information." },
     ],
     features: [
@@ -222,7 +222,7 @@ export const caseStudies: Record<string, CaseStudy> = {
     approach: [
       { title: "Assets as navigation", body: "Bitcoin, Ethereum, Tether and other assets form a list that drives the whole view." },
       { title: "Overview at a glance", body: "Balance and chart sit at the top for a quick read of the position." },
-      { title: "Status you can trust", body: "Pending execution and completed activity are clearly separated." },
+      { title: "Separate pending and completed entries", body: "Transaction status is visible in the list, so readers can find an item still awaiting execution." },
       { title: "Detail in context", body: "Buy details stay next to the activity being reviewed." },
     ],
     features: [
@@ -265,7 +265,7 @@ export const caseStudies: Record<string, CaseStudy> = {
       { title: "Location first", body: "Discovery starts from where the customer is right now." },
       { title: "Filters that make sense", body: "Sort by distance or price, then refine by language, payment and rating." },
       { title: "Trust signals", body: "Top-rated shops and verified listings help people decide." },
-      { title: "A bold brand", body: "A confident, night-time visual style that stands out on any phone." },
+      { title: "Keep selected filters visible", body: "The dark interface uses stronger highlights for selected options so customers can see what is narrowing the list." },
     ],
     features: [
       { icon: "pin", title: "Find near you", body: "Discover barbershops near the current location." },
@@ -276,12 +276,12 @@ export const caseStudies: Record<string, CaseStudy> = {
     outcome: "A service-discovery app that makes a detailed set of preferences easy to explore on mobile.",
   },
   shopmart: {
-    summary: "A fashion shopping app with offers, category browsing and quick checkout.",
+    summary: "A mobile storefront for browsing fashion collections, comparing product cards and adding items to a basket.",
     platform: "iOS and Android app",
     expertise: ["Mobile commerce UX", "App development", "Catalogue and cart", "Payments"],
     challenge:
       "Mobile shoppers want inspiration and speed at the same time. Offers, categories and product details compete for very limited space.",
-    goal: "Your style, your store: make it easy to discover trends and buy in a few taps.",
+    goal: "Show offers, collections and individual items without making a shopper hunt for search or the basket.",
     approach: [
       { title: "A personal start", body: "A welcome message, search and basket at the top of every session." },
       { title: "Offers up front", body: "A seasonal sale banner leads straight into relevant products." },
@@ -290,9 +290,9 @@ export const caseStudies: Record<string, CaseStudy> = {
     ],
     features: [
       { icon: "tag", title: "Best deals", body: "Discounts on selected items." },
-      { icon: "truck", title: "Fast delivery", body: "Quick and secure delivery to the door." },
-      { icon: "card", title: "Secure payment", body: "A secure payment gateway at checkout." },
-      { icon: "support", title: "Customer support", body: "Help available whenever shoppers need it." },
+      { icon: "list", title: "Browse by collection", body: "Collection tiles group products by season and occasion." },
+      { icon: "star", title: "Compare products", body: "Cards show prices, ratings and sale labels in a consistent order." },
+      { icon: "cart", title: "Add to basket", body: "An add control appears on each product card, with the basket reachable from the main screen." },
     ],
     outcome: "A shopping experience that gives customers several clear ways to find the next relevant product.",
   },

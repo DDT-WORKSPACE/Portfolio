@@ -13,7 +13,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { InnerHero } from "@/components/inner";
-import { SolutionNav } from "@/components/solution-nav";
 import { StartProjectButton } from "@/components/start-project";
 import { integrations } from "@/content/integrations";
 import { deliverySteps, solutions, solutionsForTool, type Solution } from "@/content/solutions";
@@ -55,7 +54,6 @@ function ToolChip({ name, slug }: { name: string; slug?: string }) {
 }
 
 export default function IntegrationsPage() {
-  const nav = [...solutions.map((s) => ({ id: s.slug, label: s.title })), { id: "tools", label: "All tools" }];
   return (
     <div className="dd dd-solutions-page">
       <InnerHero
@@ -80,8 +78,6 @@ export default function IntegrationsPage() {
           })}
         </div>
       </InnerHero>
-
-      <SolutionNav items={nav} />
 
       {solutions.map((s, i) => {
         const Icon = icons[s.icon];

@@ -6,7 +6,6 @@ import {
   ServicesHub,
   StartBanner,
   Pillars,
-  SelectedWork,
   Process,
   Ecosystem,
   Industries,
@@ -15,6 +14,7 @@ import {
   Insights,
 } from "./sections";
 import { useScrollMotion } from "./motion";
+import { SelectedWork } from "./selected-work";
 
 export function HomePage() {
   const scope = useRef<HTMLDivElement>(null);

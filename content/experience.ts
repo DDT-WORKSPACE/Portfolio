@@ -128,7 +128,7 @@ export const experience = {
       quote: "The right specialist. The right team. On demand.",
       context: "Product positioning from the supplied Talent Badger project.",
       category: "Engineering talent marketplace",
-      cover: "/Projects/brand/talentbadger.webp",
+      cover: "/Projects/talentbadger.jpg",
       logo: "/brands/talentbadger.webp",
     },
     {
@@ -137,7 +137,7 @@ export const experience = {
       quote: "Your coffee moment, perfected.",
       context: "Product positioning from the supplied Renbite project.",
       category: "Coffee discovery & ordering",
-      cover: "/Projects/brand/renbite.webp",
+      cover: "/Projects/renbite.jpg",
       logo: "/brands/renbite.webp",
     },
   ],

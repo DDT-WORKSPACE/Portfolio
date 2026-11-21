@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
-import { useTheme } from "@/components/theme";
+
 
 // Emerald & gold theme: the scene keeps its structure, every light and material swaps to the
 // Figma teal-green and gold (slightly brighter than the flat UI tones so the glass still glows).
@@ -148,7 +148,7 @@ export function HeroCore() {
   const host = useRef<HTMLDivElement>(null);
   const [failed, setFailed] = useState(false);
   const [ready, setReady] = useState(false);
-  const theme = useTheme();
+
 
   useEffect(() => {
     const el = host.current;
@@ -159,7 +159,7 @@ export function HeroCore() {
     // interactive, so the 3D work never delays the first view or the first click.
     const setup = (): (() => void) | undefined => {
       const tone = (v: string) =>
-        theme === "emerald" ? (EMERALD_3D[v] ?? v) : v;
+        EMERALD_3D[v] ?? v;
       const C = (hex: string) => new THREE.Color(tone(hex));
       const BLUE = C("#035fe8");
       const BLUE_LIGHT = C("#4d9bff");
@@ -567,7 +567,7 @@ export function HeroCore() {
       else clearTimeout(idle);
       dispose?.();
     };
-  }, [theme]);
+  }, []);
 
   return (
     <div className={`dd-core ${ready ? "is-ready" : ""}`} ref={host}>

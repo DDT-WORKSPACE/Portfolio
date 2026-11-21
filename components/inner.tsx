@@ -25,17 +25,42 @@ export function InnerHero({
           <i />
           <i />
         </div>
-        <svg className="dd-arcs" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMin slice">
+        <svg
+          className="dd-arcs"
+          viewBox="0 0 1600 700"
+          preserveAspectRatio="xMidYMin slice"
+        >
           <defs>
             <linearGradient id="pageArc" x1="0" x2="1">
               <stop offset="0" style={{ stopColor: "var(--dd-blue-light)" }} />
-              <stop offset="0.4" style={{ stopColor: "var(--dd-blue)" }} stopOpacity="0.4" />
-              <stop offset="0.5" style={{ stopColor: "var(--dd-blue)" }} stopOpacity="0" />
-              <stop offset="0.62" style={{ stopColor: "var(--dd-orange)" }} stopOpacity="0.4" />
-              <stop offset="1" style={{ stopColor: "var(--dd-orange-light)" }} />
+              <stop
+                offset="0.4"
+                style={{ stopColor: "var(--dd-blue)" }}
+                stopOpacity="0.4"
+              />
+              <stop
+                offset="0.5"
+                style={{ stopColor: "var(--dd-blue)" }}
+                stopOpacity="0"
+              />
+              <stop
+                offset="0.62"
+                style={{ stopColor: "var(--dd-orange)" }}
+                stopOpacity="0.4"
+              />
+              <stop
+                offset="1"
+                style={{ stopColor: "var(--dd-orange-light)" }}
+              />
             </linearGradient>
           </defs>
-          <circle cx="800" cy="1500" r="1380" className="dd-arc" stroke="url(#pageArc)" />
+          <circle
+            cx="800"
+            cy="1500"
+            r="1380"
+            className="dd-arc"
+            stroke="url(#pageArc)"
+          />
         </svg>
         <div className="dd-stars" />
       </div>
@@ -67,23 +92,31 @@ export function InnerHero({
     </section>
   );
 }
-export function ServiceGrid({ items = services }: { items?: Service[] }) {
+export function ServiceList({ items }: { items: Service[] }) {
   return (
-    <div className="service-index">
-      {items.map((s) => (
-        <Link key={s.slug} href={`/services/${s.slug}`}>
-          <span className="service-icon">
-            <ServiceGlyph name={s.icon} />
-          </span>
-          <h2>{s.name}</h2>
-          <p>{s.promise}</p>
-          <span className="text-link">
-            Explore service
-            <Icon name="connect" size={16} />
-          </span>
-        </Link>
+    <ul className="service-catalog-rows">
+      {items.map((service) => (
+        <li key={service.slug}>
+          <Link
+            href={`/services/${service.slug}`}
+            aria-labelledby={`service-${service.slug}`}
+          >
+            <span className="service-catalog-icon">
+              <ServiceGlyph name={service.icon} />
+            </span>
+            <div>
+              <h3 id={`service-${service.slug}`}>{service.name}</h3>
+              <p>{service.promise}</p>
+            </div>
+            <ul>
+              {service.capabilities.slice(0, 2).map((capability) => (
+                <li key={capability}>{capability}</li>
+              ))}
+            </ul>
+          </Link>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 export function ShortProcess() {

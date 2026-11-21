@@ -1,9 +1,9 @@
 "use client";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ThemedImage, emeraldVariant } from "@/components/themed-image";
-import { useTheme } from "@/components/theme";
-import gsap from "gsap";
+
+
 import {
   ArrowRight,
   ArrowUpRight,
@@ -51,6 +51,7 @@ function Badge({ children, tone = "blue" }: { children: React.ReactNode; tone?: 
 /* Intro showcase                                                      */
 /* ------------------------------------------------------------------ */
 export function IntroShowcase() {
+  const cover = work.find((project) => project.slug === "talentbadger")!.cover;
   const chips = [
     { icon: Users, title: "One connected team", body: "Design, code and automation together" },
     { icon: Eye, title: "Work you can see", body: "Reviewable progress at every stage" },
@@ -98,10 +99,7 @@ export function IntroShowcase() {
               <span>devsden.tech / work / talent-badger</span>
             </div>
             <ThemedImage
-              src="/Projects/brand/talentbadger.webp"
-              width={1280}
-              height={853}
-              alt="Talent Badger engineering marketplace shown on desktop and mobile"
+              {...cover}
               sizes="(max-width: 900px) 92vw, 960px"
             />
           </div>
@@ -228,7 +226,7 @@ const pillarCards: {
 ];
 export function Pillars() {
   return (
-    <section className="dd-section dd-pillars">
+    <section className="dd-section dd-pillars" id="disciplines">
       <div className="dd-container">
         <div className="dd-heading is-center" data-reveal>
           <Badge tone="orange">What we do</Badge>
@@ -274,169 +272,6 @@ export function Pillars() {
               </Link>
             </article>
           ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* Selected work: compact interactive showcase                         */
-/* ------------------------------------------------------------------ */
-// 3:2 mockups fill the stage; 4:3 mockups (the two apps) float whole as a card on a soft stage.
-const showcase: { slug: string; line: string }[] = [
-  { slug: "talentbadger", line: "A curated marketplace for senior engineering talent." },
-  { slug: "evpitch", line: "Video pitches that help jobseekers and recruiters connect." },
-  { slug: "renbite", line: "Coffee and food ordering in a few simple taps." },
-  { slug: "ffp-vault", line: "Financial records, due dates and reminders in one calm place." },
-];
-const platform: Record<string, string> = {
-  dashboard: "Web platform",
-  mobile: "Mobile app",
-  commerce: "E-commerce",
-};
-export function SelectedWork() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const stage = useRef<HTMLDivElement>(null);
-  const first = useRef(true);
-  const previous = useRef(0);
-  const items = showcase.map((s) => ({ ...s, p: work.find((w) => w.slug === s.slug)! }));
-  const current = items[active];
-
-  useEffect(() => {
-    const root = stage.current;
-    if (!root) return;
-    const from = previous.current;
-    previous.current = active;
-    if (first.current) {
-      first.current = false;
-      return;
-    }
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const slide = root.querySelector<HTMLElement>(`[data-slide="${active}"]`);
-    const outgoing = from !== active ? root.querySelector<HTMLElement>(`[data-slide="${from}"]`) : null;
-    const caption = root.querySelector<HTMLElement>(".dd-show-caption");
-    const tl = gsap.timeline();
-    // A full-bleed mockup would show around a smaller app card while it wipes in,
-    // so clear it away first and then reveal the card on the empty stage.
-    const clearFirst = !!outgoing && outgoing.dataset.ratio === "wide" && slide?.dataset.ratio !== "wide";
-    if (clearFirst) {
-      // The slide's own CSS opacity transition is delayed; switch it off so the fade runs now.
-      gsap.set(outgoing, { transition: "none", opacity: 1 });
-      tl.to(outgoing, { opacity: 0, duration: 0.3, ease: "power1.out" }, 0);
-      tl.add(() => gsap.set(outgoing, { clearProps: "opacity,transition" }));
-    }
-    if (slide) {
-      tl.fromTo(
-        slide,
-        { clipPath: "inset(0% 0% 0% 100% round 20px)" },
-        { clipPath: "inset(0% 0% 0% 0% round 20px)", duration: 0.9, ease: "power3.inOut" },
-        clearFirst ? 0.16 : 0,
-      );
-      const imgs = slide.querySelectorAll("img");
-      if (imgs.length) {
-        if (slide.dataset.ratio === "wide")
-          tl.fromTo(imgs, { scale: 1.08 }, { scale: 1, duration: 1.2, ease: "power3.out" }, 0);
-        else tl.fromTo(imgs, { scale: 0.94, y: 18 }, { scale: 1, y: 0, duration: 1.1, ease: "power3.out" }, 0.1);
-      }
-    }
-    if (caption)
-      tl.fromTo(
-        caption.children,
-        { autoAlpha: 0, y: 14 },
-        { autoAlpha: 1, y: 0, stagger: 0.06, duration: 0.6, ease: "power2.out" },
-        0.25,
-      );
-    return () => {
-      tl.kill();
-      if (clearFirst) gsap.set(outgoing, { clearProps: "opacity,transition" });
-    };
-  }, [active]);
-
-  return (
-    <section className="dd-section dd-work" id="work">
-      <span id="projects" className="dd-anchor" />
-      <div className="dd-container">
-        <div className="dd-heading is-split" data-reveal>
-          <div>
-            <Badge>Selected work</Badge>
-            <h2>
-              Real products.
-              <span className="dd-blue"> Out in the world.</span>
-            </h2>
-          </div>
-          <Link href="/work" className="dd-btn dd-btn-outline">
-            All projects <ArrowUpRight size={16} />
-          </Link>
-        </div>
-        <div
-          className={`dd-show ${paused ? "is-paused" : ""}`}
-          data-reveal
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onFocus={() => setPaused(true)}
-          onBlur={() => setPaused(false)}
-        >
-          <div className="dd-show-list" role="tablist" aria-label="Selected projects">
-            {items.map((it, i) => (
-              <button
-                key={it.slug}
-                type="button"
-                role="tab"
-                id={`show-tab-${i}`}
-                aria-selected={i === active}
-                aria-controls="show-panel"
-                className={`dd-show-item ${i === active ? "is-active" : ""}`}
-                onClick={() => setActive(i)}
-              >
-                <span className="dd-show-num">0{i + 1}</span>
-                <span className="dd-show-text">
-                  <strong>{it.p.projectName}</strong>
-                  <small>
-                    {it.p.industry} · {platform[it.p.type] ?? "Digital product"}
-                  </small>
-                  <span className="dd-show-line">{it.line}</span>
-                </span>
-                <ArrowUpRight size={18} className="dd-show-go" />
-                {i === active && (
-                  <span className="dd-show-progress" aria-hidden="true">
-                    <span onAnimationEnd={() => setActive((a) => (a + 1) % items.length)} />
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
-          <div className="dd-show-stage" ref={stage} id="show-panel" role="tabpanel" aria-labelledby={`show-tab-${active}`}>
-            <div className="dd-show-frame">
-              {items.map((it, i) => (
-                <div
-                  key={it.slug}
-                  className={`dd-show-slide ${i === active ? "is-active" : ""}`}
-                  data-slide={i}
-                  aria-hidden={i !== active}
-                  data-ratio={it.p.cover.width / it.p.cover.height > 1.4 ? "wide" : "tall"}
-                >
-                  <ThemedImage
-                    src={it.p.cover.src}
-                    width={it.p.cover.width}
-                    height={it.p.cover.height}
-                    alt={it.p.cover.alt}
-                    sizes="(max-width: 1020px) 92vw, 720px"
-                  />
-                </div>
-              ))}
-            </div>
-            <div className="dd-show-caption">
-              <div>
-                <h3>{current.p.title}</h3>
-                <p>{current.p.stack.join(" · ")}</p>
-              </div>
-              <Link href={`/work/${current.slug}`} className="dd-btn dd-btn-primary dd-btn-sm">
-                View case study <ArrowUpRight size={15} />
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -562,7 +397,6 @@ const solutions = [
   { title: "Helpdesk and support", body: "Tickets, chat and AI assistants with human handoff.", icon: Headphones, tone: "navy", href: "/integrations#support", pos: "mr" },
   { title: "Accounting and ERP links", body: "Invoices, payments and stock synced with your tools.", icon: Receipt, tone: "amber", href: "/integrations#accounting", pos: "bc" },
 ] as const;
-const ringStopsBrand = ["#035fe8", "#2f86ff", "#7db6ff", "#ff9a4d", "#ff6f00", "#1f74ff"];
 // Same ramp through scripts/emerald-palette.mjs for the Emerald & gold theme.
 const ringStopsEmerald = ["#21615e", "#32958f", "#6dcec9", "#e4aa3a", "#a67517", "#2c837e"];
 function ringColor(t: number, ringStops: string[]) {
@@ -575,7 +409,7 @@ function ringColor(t: number, ringStops: string[]) {
   return `rgb(${ch(16)}, ${ch(8)}, ${ch(0)})`;
 }
 export function Ecosystem() {
-  const ringStops = useTheme() === "emerald" ? ringStopsEmerald : ringStopsBrand;
+  const ringStops = ringStopsEmerald;
   const segments = Array.from({ length: 28 });
   const r2 = (n: number) => Math.round(n * 100) / 100;
   const arrows = [

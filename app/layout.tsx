@@ -4,8 +4,6 @@ import Script from "next/script";
 import { Providers } from "@/components/providers";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { ThemeSwitch } from "@/components/theme";
-import { themeScript } from "@/components/theme-script";
 import { VisitorTracker } from "@/components/visitor-tracker";
 import { OffscreenPause } from "@/components/offscreen-pause";
 import { mailReady } from "@/lib/mail";
@@ -17,7 +15,7 @@ import "./studio.css";
 import "./brand.css";
 import "./theme-emerald.css";
 import "./theme-emerald-overrides.css";
-import "./theme-switch.css";
+import "./editorial.css";
 const display = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-display",
@@ -33,7 +31,7 @@ const mono = Geist_Mono({
   preload: false,
 });
 export const metadata: Metadata = {
-  icons: { icon: "/Logo/logo.png", apple: "/Logo/logo.png" },
+  icons: { icon: "/Logo/logo-emerald.png", apple: "/Logo/logo-emerald.png" },
   title: {
     default: "Websites, apps & business automation | DevsDen Tech",
     template: "%s | DevsDen Tech",
@@ -57,12 +55,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
+      data-theme="emerald"
       className={`${display.variable} ${mono.variable}`}
-      suppressHydrationWarning
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
       <body id="top">
         <a className="skip-link" href="#main">
           Skip to content
@@ -71,7 +66,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Header />
           <main id="main">{children}</main>
           <Footer />
-          <ThemeSwitch />
           <VisitorTracker />
           <OffscreenPause />
         </Providers>

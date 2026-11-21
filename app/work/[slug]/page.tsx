@@ -1,291 +1,190 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { ThemedImage } from "@/components/themed-image";
 import { notFound } from "next/navigation";
-import {
-  ArrowUpRight,
-  ArrowRight,
-  Target,
-  Search,
-  Users,
-  ShieldCheck,
-  Milestone,
-  Video,
-  Sparkles,
-  Globe2,
-  LayoutDashboard,
-  MonitorSmartphone,
-  Route,
-  Star,
-  BookOpen,
-  Map,
-  ShoppingCart,
-  CreditCard,
-  Gift,
-  Navigation,
-  CalendarDays,
-  BellRing,
-  LockKeyhole,
-  FolderOpen,
-  Plane,
-  Hotel,
-  Stamp,
-  Tag,
-  ChartLine,
-  Wallet,
-  ListChecks,
-  SlidersHorizontal,
-  MapPin,
-  Truck,
-  Headphones,
-  Layers3,
-  Cpu,
-  CheckCircle2,
-  type LucideIcon,
-} from "lucide-react";
+import { ProjectCover } from "@/components/project-cover";
+import { caseStudies } from "@/content/case-studies";
 import { work } from "@/content/work";
-import { caseStudies, type FeatureIcon } from "@/content/case-studies";
-import { InnerHero } from "@/components/inner";
-import { StartProjectButton } from "@/components/start-project";
+import {
+  EditorialContact,
+  EditorialContent,
+  EditorialHero,
+  EditorialRows,
+  EditorialSection,
+} from "@/components/editorial-detail";
 
-const icons: Record<FeatureIcon, LucideIcon> = {
-  search: Search,
-  team: Users,
-  shield: ShieldCheck,
-  milestone: Milestone,
-  video: Video,
-  match: Sparkles,
-  globe: Globe2,
-  dashboard: LayoutDashboard,
-  device: MonitorSmartphone,
-  route: Route,
-  star: Star,
-  guide: BookOpen,
-  map: Map,
-  cart: ShoppingCart,
-  card: CreditCard,
-  gift: Gift,
-  track: Navigation,
-  calendar: CalendarDays,
-  bell: BellRing,
-  lock: LockKeyhole,
-  folder: FolderOpen,
-  plane: Plane,
-  hotel: Hotel,
-  visa: Stamp,
-  tag: Tag,
-  chart: ChartLine,
-  wallet: Wallet,
-  list: ListChecks,
-  filter: SlidersHorizontal,
-  pin: MapPin,
-  truck: Truck,
-  support: Headphones,
+const editorial: Record<string, { title: string; takeaway: string }> = {
+  talentbadger: {
+    title: "Finding the right engineering specialist",
+    takeaway:
+      "A hiring team can start with a domain such as embedded firmware, while a specialist has a separate route to join. Each sees the information needed to take the next step.",
+  },
+  renbite: {
+    title: "From a coffee craving to an order",
+    takeaway:
+      "Search, nearby restaurants and favourites give customers different places to start. The order status gives them a reason to stay in the app after checkout.",
+  },
+  "crypto-wallet": {
+    title: "Reading a wallet without losing the transaction",
+    takeaway:
+      "The selected asset stays in view as someone checks its chart, compares entries or opens the details of a transaction.",
+  },
+  "ffp-vault": {
+    title: "Putting due dates next to the records they belong to",
+    takeaway:
+      "The calendar foregrounds the date. Status labels explain whether the user needs to act, and the corresponding record stays close by.",
+  },
+  besttrip: {
+    title: "Planning a trip from one search",
+    takeaway:
+      "Travellers can start with dates and a route, or browse destinations and offers when their plans are still open.",
+  },
+  "gcl-storefront": {
+    title: "Making a large catalogue easier to shop",
+    takeaway:
+      "Search and categories stay easy to find while the campaign area changes. A customer looking for a specific product has a direct route past the promotion.",
+  },
+  evpitch: {
+    title: "Giving a candidate room to introduce themselves",
+    takeaway:
+      "Candidates can see how to submit an introduction. Recruiters and employers can go directly to the part of the site that explains how to find people.",
+  },
+  walkthroughz: {
+    title: "Turning a city guide into a walk",
+    takeaway:
+      "Destination pages give visitors a place to start. Routes and nearby recommendations turn a broad city browse into a plan.",
+  },
+  beardfriends: {
+    title: "Finding a barber by more than distance",
+    takeaway:
+      "Distance is a starting point. Language, ratings and payment preferences let customers narrow the list before they visit a shop profile.",
+  },
+  shopmart: {
+    title: "Browsing fashion on a small screen",
+    takeaway:
+      "The same home screen supports a search for a specific product, an offer-led visit and a browse by collection. Prices and ratings help shoppers compare the products they find.",
+  },
 };
 
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return work.map((w) => ({ slug: w.slug }));
-}
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
-  const w = work.find((w) => w.slug === slug);
-  return { title: w ? `${w.projectName} case study` : "Case study", description: caseStudies[slug]?.summary };
+  return work.map(({ slug }) => ({ slug }));
 }
 
-export default async function WorkPage({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
-  const i = work.findIndex((w) => w.slug === slug);
-  const c = caseStudies[slug];
-  if (i < 0 || !c) notFound();
-  const w = work[i];
-  const next = work[(i + 1) % work.length];
+  const project = work.find((item) => item.slug === slug);
+  return {
+    title: project ? `${project.projectName} case study` : "Case study",
+    description: caseStudies[slug]?.summary,
+  };
+}
+
+export default async function WorkPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const index = work.findIndex((item) => item.slug === slug);
+  const study = caseStudies[slug];
+  if (index < 0 || !study) notFound();
+
+  const project = work[index];
+  const next = work[(index + 1) % work.length];
+  const notes = editorial[slug];
 
   return (
-    <div className="dd dd-case">
-      <InnerHero marker={w.projectName} title={w.title} body={c.summary} cta={false}>
-        <div className="dd-case-tags">
-          <span>{w.industry}</span>
-          <span>{c.platform}</span>
-          <span>Case study</span>
-        </div>
-      </InnerHero>
-
-      <section className="dd-case-cover">
-        <div className="dd-container">
-          <div className="dd-case-frame">
-            <ThemedImage
-              src={w.cover.src}
-              width={w.cover.width}
-              height={w.cover.height}
-              alt={w.cover.alt}
-              sizes="(max-width: 1240px) 94vw, 1160px"
-              preload
-            />
-          </div>
-        </div>
-      </section>
-
-      <section className="dd-case-facts">
-        <div className="dd-container dd-case-facts-grid">
+    <article className="ed-page ed-case">
+      <EditorialHero
+        parent={{ label: "All projects", href: "/work" }}
+        title={project.projectName}
+        description={study.summary}
+      >
+        <dl className="ed-brief ed-case-facts">
           <div>
-            <small>Project</small>
-            <strong>{w.projectName}</strong>
+            <dt>Industry</dt>
+            <dd>{project.industry}</dd>
           </div>
           <div>
-            <small>Industry</small>
-            <strong>{w.industry}</strong>
+            <dt>Platform</dt>
+            <dd>{study.platform}</dd>
           </div>
           <div>
-            <small>Platform</small>
-            <strong>{c.platform}</strong>
+            <dt>Project focus</dt>
+            <dd>{project.stack.join(" · ")}</dd>
           </div>
-          <div>
-            <small>Focus</small>
-            <strong>{w.stack.join(", ")}</strong>
+        </dl>
+      </EditorialHero>
+      <ProjectCover projectName={project.projectName} cover={project.cover} />
+      <EditorialContent
+        anchors={[
+          { id: "brief", label: "The brief" },
+          { id: "decisions", label: "Design decisions" },
+          { id: "features", label: "What the product includes" },
+          { id: "takeaway", label: "Design takeaway" },
+          { id: "next-project", label: "Next project" },
+        ]}
+      >
+        <EditorialSection id="brief" title={notes.title}>
+          <p>{study.challenge}</p>
+          <div className="ed-note">
+            <h3>Project goal</h3>
+            <p>{study.goal}</p>
           </div>
-        </div>
-      </section>
-
-      <section className="dd-case-section">
-        <div className="dd-container dd-case-challenge">
-          <div>
-            <span className="dd-badge">
-              <i aria-hidden="true" />
-              The challenge
-            </span>
-            <h2>What needed solving</h2>
-            <p>{c.challenge}</p>
-          </div>
-          <aside className="dd-case-goal">
-            <span className="dd-case-goal-icon">
-              <Target size={22} />
-            </span>
-            <small>Our goal</small>
-            <p>{c.goal}</p>
-          </aside>
-        </div>
-      </section>
-
-      <section className="dd-case-section is-tinted">
-        <div className="dd-container">
-          <div className="dd-heading is-center">
-            <span className="dd-badge is-orange">
-              <i aria-hidden="true" />
-              Our approach
-            </span>
-            <h2>How we shaped {w.projectName}</h2>
-          </div>
-          <ol className="dd-case-steps">
-            {c.approach.map((step, n) => (
-              <li key={step.title}>
-                <span className="dd-case-step-num">0{n + 1}</span>
-                <h3>{step.title}</h3>
-                <p>{step.body}</p>
+        </EditorialSection>
+        <EditorialSection id="decisions" title="Design decisions">
+          <EditorialRows rows={study.approach} />
+        </EditorialSection>
+        <EditorialSection id="features" title="What the product includes">
+          <ul className="ed-feature-list">
+            {study.features.map(({ title, body }) => (
+              <li key={title}>
+                <h3>{title}</h3>
+                <p>{body}</p>
               </li>
             ))}
-          </ol>
-        </div>
-      </section>
-
-      <section className="dd-case-section">
-        <div className="dd-container">
-          <div className="dd-heading is-center">
-            <span className="dd-badge">
-              <i aria-hidden="true" />
-              Key features
-            </span>
-            <h2>What the product does well</h2>
-          </div>
-          <div className="dd-case-features">
-            {c.features.map((f) => {
-              const Icon = icons[f.icon] ?? CheckCircle2;
-              return (
-                <article key={f.title}>
-                  <span className="dd-case-feature-icon">
-                    <Icon size={22} />
-                  </span>
-                  <h3>{f.title}</h3>
-                  <p>{f.body}</p>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="dd-case-section is-tinted">
-        <div className="dd-container dd-case-expertise">
-          <div>
-            <span className="dd-badge">
-              <i aria-hidden="true" />
-              The expertise
-            </span>
-            <h2>Disciplines behind the work</h2>
-            <p>Design, engineering and delivery working as one team around the same product goal.</p>
-          </div>
-          <div className="dd-case-chips">
+          </ul>
+          <div className="ed-inline-facts">
             <div>
-              <small>
-                <Layers3 size={15} /> Expertise
-              </small>
-              <ul>
-                {c.expertise.map((e) => (
-                  <li key={e}>{e}</li>
-                ))}
-              </ul>
+              <strong>Disciplines</strong>
+              <p>{study.expertise.join(" · ")}</p>
             </div>
-            {c.tech && (
+            {study.tech && (
               <div>
-                <small>
-                  <Cpu size={15} /> Technologies
-                </small>
-                <ul className="is-tech">
-                  {c.tech.map((t) => (
-                    <li key={t}>{t}</li>
-                  ))}
-                </ul>
+                <strong>Technologies</strong>
+                <p>{study.tech.join(" · ")}</p>
               </div>
             )}
           </div>
-        </div>
-      </section>
-
-      <section className="dd-case-section">
-        <div className="dd-container">
-          <div className="dd-case-result">
+        </EditorialSection>
+        <EditorialSection id="takeaway" title="Design takeaway">
+          <p>{notes.takeaway}</p>
+        </EditorialSection>
+        <EditorialContact
+          title="Working on a similar product?"
+          text="Tell us how people use it today and what you want to make easier."
+          href={`/contact?type=${project.type === "mobile" ? "Mobile" : "Web"}`}
+        />
+        <EditorialSection id="next-project" title="Next project">
+          <Link className="ed-project-example" href={`/work/${next.slug}`}>
+            <Image
+              {...next.cover}
+              alt=""
+              sizes="(max-width: 700px) 92vw, 360px"
+            />
             <div>
-              <span className="dd-badge is-dark">
-                <i aria-hidden="true" />
-                The result
-              </span>
-              <p>{c.outcome}</p>
+              <h3>{next.projectName}</h3>
+              <p>{caseStudies[next.slug].summary}</p>
+              <span>Read case study</span>
             </div>
-            <div className="dd-case-result-actions">
-              <StartProjectButton className="dd-btn dd-btn-white">
-                Start a similar project <ArrowUpRight size={16} />
-              </StartProjectButton>
-              <Link href="/work" className="dd-btn dd-btn-ghost">
-                All projects <ArrowRight size={16} />
-              </Link>
-            </div>
-          </div>
-
-          <Link href={`/work/${next.slug}`} className="dd-case-next">
-            <span className="dd-case-next-thumb">
-              <ThemedImage src={next.cover.src} width={next.cover.width} height={next.cover.height} alt="" sizes="220px" />
-            </span>
-            <span className="dd-case-next-text">
-              <small>Next case study</small>
-              <strong>{next.projectName}</strong>
-              <span>{next.title}</span>
-            </span>
-            <span className="dd-case-next-go">
-              <ArrowUpRight size={20} />
-            </span>
           </Link>
-        </div>
-      </section>
-    </div>
+        </EditorialSection>
+      </EditorialContent>
+    </article>
   );
 }
